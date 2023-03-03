@@ -271,6 +271,8 @@ public class GemFireResourceCollectorApplicationListenerUnitTests {
 
 	static class AfterTestMethodEventSubType extends AfterTestMethodEvent {
 
+		private static final long serialVersionUID = 1;
+
 		AfterTestMethodEventSubType() {
 			super(mock(TestContext.class));
 		}

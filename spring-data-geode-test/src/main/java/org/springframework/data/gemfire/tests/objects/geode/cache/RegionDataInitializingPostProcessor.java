@@ -126,7 +126,7 @@ public class RegionDataInitializingPostProcessor<T> {
 	}
 
 	@SuppressWarnings("unused")
-	public static class EntityIdentifierBuilder<T> {
+	public static final class EntityIdentifierBuilder<T> {
 
 		private final RegionDataInitializingPostProcessor<T> postProcessor;
 
