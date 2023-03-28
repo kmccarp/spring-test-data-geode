@@ -71,7 +71,7 @@ class SpringSampleWarPlugin extends SpringSamplePlugin {
             }
         }
 
-        project.tasks.matching { it.name == "appBeforeIntegrationTest" }.all { task ->
+        project.tasks.matching { "appBeforeIntegrationTest".equals(it.name) }.all { task ->
             task.dependsOn prepareAppServerForIntegrationTests
         }
 
