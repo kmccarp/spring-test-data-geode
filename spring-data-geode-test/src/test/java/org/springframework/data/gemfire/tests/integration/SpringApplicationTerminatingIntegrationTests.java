@@ -67,7 +67,7 @@ public class SpringApplicationTerminatingIntegrationTests extends ForkingClientS
 	@AfterClass
 	public static void assertSpringApplicationTerminated() {
 
-		Condition springApplicationTerminatedCondition = () -> springApplicationProcess.isNotRunning();
+		Condition springApplicationTerminatedCondition = springApplicationProcess::isNotRunning;
 
 		waitOn(springApplicationTerminatedCondition, Duration.ofSeconds(10L).toMillis());
 
