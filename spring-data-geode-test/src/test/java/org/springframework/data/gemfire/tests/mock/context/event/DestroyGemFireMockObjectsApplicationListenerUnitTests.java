@@ -122,6 +122,8 @@ public class DestroyGemFireMockObjectsApplicationListenerUnitTests {
 
 	static class AfterTestExecutionEventExtension extends AfterTestExecutionEvent {
 
+		private static final long serialVersionUID = 1;
+
 		AfterTestExecutionEventExtension(TestContext context) {
 			super(context);
 		}

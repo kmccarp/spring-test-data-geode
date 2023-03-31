@@ -687,7 +687,7 @@ public abstract class IntegrationTestsSupport {
 		boolean evaluate();
 	}
 
-	protected static abstract class AbstractApplicationEventPublisherCacheLifecycleListenerAdapter
+	protected abstract static class AbstractApplicationEventPublisherCacheLifecycleListenerAdapter
 			implements ApplicationEventPublisherAware, CacheLifecycleListener {
 
 		private ApplicationEventPublisher applicationEventPublisher;
@@ -786,6 +786,8 @@ public abstract class IntegrationTestsSupport {
 
 	protected static class AbstractCacheEvent extends ApplicationEvent {
 
+		private static final long serialVersionUID = 1;
+
 		protected static <T> T requireNonNull(@NonNull T target, String message) {
 			Assert.notNull(target, message);
 			return target;
@@ -802,12 +804,16 @@ public abstract class IntegrationTestsSupport {
 
 	public static class CacheCreatedEvent extends AbstractCacheEvent {
 
+		private static final long serialVersionUID = 1;
+
 		public CacheCreatedEvent(@NonNull GemFireCache cache) {
 			super(cache);
 		}
 	}
 
 	public static class CacheClosedEvent extends AbstractCacheEvent {
+
+		private static final long serialVersionUID = 1;
 
 		public CacheClosedEvent(@NonNull GemFireCache cache) {
 			super(cache);

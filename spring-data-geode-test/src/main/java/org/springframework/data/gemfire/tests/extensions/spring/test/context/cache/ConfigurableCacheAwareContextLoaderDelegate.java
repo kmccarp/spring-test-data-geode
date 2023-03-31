@@ -100,11 +100,8 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 
 			String cacheEnabledProperty = SpringProperties.getProperty(SPRING_TEST_CONTEXT_CACHE_ENABLED_PROPERTY);
 
-			boolean resolvedCacheEnabled =
-				(!StringUtils.hasText(cacheEnabledProperty) || Boolean.parseBoolean(cacheEnabledProperty))
+			return (!StringUtils.hasText(cacheEnabledProperty) || Boolean.parseBoolean(cacheEnabledProperty))
 					&& defaultCacheEnabled;
-
-			return resolvedCacheEnabled;
 		};
 	}
 
@@ -122,10 +119,8 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 	@SuppressWarnings("all")
 	public boolean isContextLoaded(@NonNull MergedContextConfiguration mergedContextConfiguration) {
 
-		boolean contextLoaded = (isSpringTestContextCacheEnabled() && super.isContextLoaded(mergedContextConfiguration))
+		return (isSpringTestContextCacheEnabled() && super.isContextLoaded(mergedContextConfiguration))
 			|| isApplicationContextActive();
-
-		return contextLoaded;
 	}
 
 	/**
