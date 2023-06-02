@@ -88,19 +88,19 @@ public class ClientServerIntegrationTestsConfiguration {
 
 	@Bean
 	CacheServerConfigurer cacheServerPortConfigurer(
-			@Value("${" + GEMFIRE_CACHE_SERVER_PORT_PROPERTY + ":" + DEFAULT_PORT + "}") int port) {
+	@Value("${" + GEMFIRE_CACHE_SERVER_PORT_PROPERTY + ":" + DEFAULT_PORT + "}") int port) {
 
 		return (beanName, cacheServerFactoryBean) -> cacheServerFactoryBean.setPort(port);
 	}
 
 	@Bean
 	ClientCacheConfigurer clientCachePoolPortConfigurer(
-			@Value("${" + GEMFIRE_CACHE_SERVER_PORT_PROPERTY + ":" + DEFAULT_PORT + "}") int port) {
+	@Value("${" + GEMFIRE_CACHE_SERVER_PORT_PROPERTY + ":" + DEFAULT_PORT + "}") int port) {
 
 		return (beanName, clientCacheFactoryBean) -> {
 
 			List<ConnectionEndpoint> servers =
-				Collections.singletonList(new ConnectionEndpoint("localhost", port));
+			Collections.singletonList(new ConnectionEndpoint("localhost", port));
 
 			clientCacheFactoryBean.setServers(servers);
 		};
@@ -110,20 +110,23 @@ public class ClientServerIntegrationTestsConfiguration {
 	@EnableLocator
 	@EnableLogging
 	@Profile("locator")
-	static class LocatorConfiguration { }
+	static class LocatorConfiguration {
+	}
 
 	@Configuration
 	@EnableLocator
 	@EnableLogging
 	@EnableManager(start = true)
 	@Profile("locator-manager")
-	static class LocatorManagerConfiguration { }
+	static class LocatorManagerConfiguration {
+	}
 
 	@Configuration
 	@EnableLogging
 	@EnableManager(start = true)
 	@Profile("manager")
-	static class ManagerConfiguration { }
+	static class ManagerConfiguration {
+	}
 
 	public static class SpringBootIsAbsentCondition implements Condition {
 
@@ -132,7 +135,7 @@ public class ClientServerIntegrationTestsConfiguration {
 		public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
 
 			return !ClassUtils.isPresent("org.springframework.boot.SpringApplication",
-				Thread.currentThread().getContextClassLoader());
+			Thread.currentThread().getContextClassLoader());
 		}
 	}
 }

@@ -59,7 +59,7 @@ public class DestroyGemFireMockObjectsApplicationListener implements Application
 	 */
 	@SuppressWarnings("unchecked")
 	public static DestroyGemFireMockObjectsApplicationListener newInstance(
-			@Nullable Class<? extends ApplicationEvent>... destroyEventTypes) {
+	@Nullable Class<? extends ApplicationEvent>... destroyEventTypes) {
 
 		return newInstance(Arrays.asList(ArrayUtils.nullSafeArray(destroyEventTypes, Class.class)));
 	}
@@ -78,7 +78,7 @@ public class DestroyGemFireMockObjectsApplicationListener implements Application
 	 * @see #newInstance(Iterable)
 	 */
 	public static DestroyGemFireMockObjectsApplicationListener newInstance(
-			@Nullable Iterable<Class<? extends ApplicationEvent>> destroyEventTypes) {
+	@Nullable Iterable<Class<? extends ApplicationEvent>> destroyEventTypes) {
 
 		return new DestroyGemFireMockObjectsApplicationListener(destroyEventTypes);
 	}
@@ -97,12 +97,12 @@ public class DestroyGemFireMockObjectsApplicationListener implements Application
 	 * @see java.lang.Iterable
 	 */
 	public DestroyGemFireMockObjectsApplicationListener(
-			@Nullable Iterable<Class<? extends ApplicationEvent>> destroyEventTypes) {
+	@Nullable Iterable<Class<? extends ApplicationEvent>> destroyEventTypes) {
 
 		Set<Class<? extends ApplicationEvent>> resolvedDestroyEventTypes =
-			StreamSupport.stream(CollectionUtils.nullSafeIterable(destroyEventTypes).spliterator(), false)
-				.filter(Objects::nonNull)
-				.collect(Collectors.toSet());
+		StreamSupport.stream(CollectionUtils.nullSafeIterable(destroyEventTypes).spliterator(), false)
+	.filter(Objects::nonNull)
+	.collect(Collectors.toSet());
 
 		this.configuredDestroyEventTypes = Collections.unmodifiableSet(resolvedDestroyEventTypes);
 	}

@@ -86,8 +86,8 @@ public class GemFireMockObjectsSupportUnitTests {
 		AsyncEventListener mockAsyncEventListener = mock(AsyncEventListener.class);
 
 		AsyncEventQueue asyncEventQueue =
-			asyncEventQueueFactory.create("mockAsyncEventQueueEventDispatchingIsAutoByDefault",
-				mockAsyncEventListener);
+		asyncEventQueueFactory.create("mockAsyncEventQueueEventDispatchingIsAutoByDefault",
+	mockAsyncEventListener);
 
 		assertThat(asyncEventQueue).isNotNull();
 		assertThat(asyncEventQueue.isDispatchingPaused()).isFalse();
@@ -113,8 +113,8 @@ public class GemFireMockObjectsSupportUnitTests {
 		AsyncEventListener mockAsyncEventListener = mock(AsyncEventListener.class);
 
 		AsyncEventQueue asyncEventQueue =
-			asyncEventQueueFactory.create("mockAsyncEventQueuePauseAndResumeEventDispatchingIsCorrect",
-				mockAsyncEventListener);
+		asyncEventQueueFactory.create("mockAsyncEventQueuePauseAndResumeEventDispatchingIsCorrect",
+	mockAsyncEventListener);
 
 		assertThat(asyncEventQueue).isNotNull();
 		assertThat(asyncEventQueue.isDispatchingPaused()).isTrue();
@@ -128,7 +128,7 @@ public class GemFireMockObjectsSupportUnitTests {
 	public void mockClientSubscriptionConfigIsCorrect() {
 
 		ClientSubscriptionConfig mockClientSubscriptionConfig =
-			GemFireMockObjectsSupport.mockClientSubscriptionConfig();
+		GemFireMockObjectsSupport.mockClientSubscriptionConfig();
 
 		assertThat(mockClientSubscriptionConfig).isNotNull();
 
@@ -149,12 +149,12 @@ public class GemFireMockObjectsSupportUnitTests {
 		RegionAttributes<?, ?> mockRegionAttributes = mock(RegionAttributes.class);
 
 		Region<?, ?> mockRegion =
-			GemFireMockObjectsSupport.mockRegion(mockRegionService, "MockIndexRegion", mockRegionAttributes);
+		GemFireMockObjectsSupport.mockRegion(mockRegionService, "MockIndexRegion", mockRegionAttributes);
 
 		assertThat(mockRegion).isNotNull();
 
 		Index mockIndex = GemFireMockObjectsSupport
-			.mockIndex("MockIndex", "*", "/MockIndexRegion alias", IndexType.FUNCTIONAL);
+		.mockIndex("MockIndex", "*", "/MockIndexRegion alias", IndexType.FUNCTIONAL);
 
 		assertThat(mockIndex).isNotNull();
 		assertThat(mockIndex.getName()).isEqualTo("MockIndex");
@@ -207,7 +207,7 @@ public class GemFireMockObjectsSupportUnitTests {
 	}
 
 	@Test
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void mockSubRegionIsCorrect() {
 
 		Region mockRegion = mock(Region.class);
@@ -218,7 +218,7 @@ public class GemFireMockObjectsSupportUnitTests {
 		RegionAttributes mockRegionAttributes = mock(RegionAttributes.class);
 
 		Region mockSubRegion = GemFireMockObjectsSupport.mockSubRegion(mockRegion, "MockSubRegion",
-			mockRegionAttributes);
+		mockRegionAttributes);
 
 		assertThat(mockSubRegion).isNotNull();
 		assertThat(mockSubRegion.getName()).isEqualTo("MockSubRegion");
@@ -234,7 +234,7 @@ public class GemFireMockObjectsSupportUnitTests {
 		RegionAttributes<?, ?> mockRegionAttributes = mock(RegionAttributes.class);
 
 		Region<?, ?> mockRegion =
-			GemFireMockObjectsSupport.mockRegion(mockRegionService, "MockRegion", mockRegionAttributes);
+		GemFireMockObjectsSupport.mockRegion(mockRegionService, "MockRegion", mockRegionAttributes);
 
 		assertThat(mockRegion).isNotNull();
 		assertThat(mockRegion.getName()).isEqualTo("MockRegion");
@@ -254,7 +254,7 @@ public class GemFireMockObjectsSupportUnitTests {
 		RegionAttributes<?, ?> mockRegionAttributes = mock(RegionAttributes.class);
 
 		Region<?, ?> mockRegion =
-			GemFireMockObjectsSupport.mockRegion(mockRegionService, "MockRegion", mockRegionAttributes);
+		GemFireMockObjectsSupport.mockRegion(mockRegionService, "MockRegion", mockRegionAttributes);
 
 		assertThat(mockRegion).isNotNull();
 		assertThat(mockRegion.getName()).isEqualTo("MockRegion");
@@ -281,7 +281,7 @@ public class GemFireMockObjectsSupportUnitTests {
 		RegionAttributes<?, ?> mockRegionAttributes = mock(RegionAttributes.class);
 
 		Region<?, ?> mockRegion =
-			GemFireMockObjectsSupport.mockRegion(mockRegionService, "MockRegion", mockRegionAttributes);
+		GemFireMockObjectsSupport.mockRegion(mockRegionService, "MockRegion", mockRegionAttributes);
 
 		assertThat(mockRegion).isNotNull();
 		assertThat(mockRegion.getName()).isEqualTo("MockRegion");

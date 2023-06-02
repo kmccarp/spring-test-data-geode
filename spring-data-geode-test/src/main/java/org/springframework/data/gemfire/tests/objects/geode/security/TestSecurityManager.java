@@ -39,7 +39,7 @@ public class TestSecurityManager implements org.apache.geode.security.SecurityMa
 	public static TestSecurityManager getInstance() {
 
 		return Optional.ofNullable(instance.get())
-			.orElseThrow(() -> newIllegalStateException("No TestSecurityManager was initialized"));
+		.orElseThrow(() -> newIllegalStateException("No TestSecurityManager was initialized"));
 	}
 
 	public TestSecurityManager() {

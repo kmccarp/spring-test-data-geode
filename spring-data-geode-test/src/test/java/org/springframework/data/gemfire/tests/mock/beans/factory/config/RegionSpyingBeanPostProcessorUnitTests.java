@@ -61,10 +61,10 @@ public class RegionSpyingBeanPostProcessorUnitTests {
 		assertThat(beanPostProcessor).isNotNull();
 
 		assertThat(beanPostProcessor.postProcessAfterInitialization(mockRegionOne, "MockRegionOne"))
-			.isEqualTo(mockRegionOne);
+		.isEqualTo(mockRegionOne);
 
 		assertThat(beanPostProcessor.postProcessAfterInitialization(mockRegionTwo, "MockRegionTwo"))
-			.isEqualTo(mockRegionTwo);
+		.isEqualTo(mockRegionTwo);
 
 		verify(beanPostProcessor, times(1)).doSpy(eq(mockRegionOne));
 		verify(beanPostProcessor, times(1)).doSpy(eq(mockRegionTwo));
@@ -79,17 +79,17 @@ public class RegionSpyingBeanPostProcessorUnitTests {
 		Region<?, ?> mockRegionTwo = mock(Region.class, "MockRegionTwo");
 
 		RegionSpyingBeanPostProcessor beanPostProcessor =
-			spy(new RegionSpyingBeanPostProcessor("MockRegionOne"));
+		spy(new RegionSpyingBeanPostProcessor("MockRegionOne"));
 
 		doAnswer(invocation -> invocation.getArgument(0)).when(beanPostProcessor).doSpy(any());
 
 		assertThat(beanPostProcessor).isNotNull();
 
 		assertThat(beanPostProcessor.postProcessAfterInitialization(mockRegionOne, "MockRegionOne"))
-			.isEqualTo(mockRegionOne);
+		.isEqualTo(mockRegionOne);
 
 		assertThat(beanPostProcessor.postProcessAfterInitialization(mockRegionTwo, "MockRegionTwo"))
-			.isEqualTo(mockRegionTwo);
+		.isEqualTo(mockRegionTwo);
 
 		verify(beanPostProcessor, times(1)).doSpy(eq(mockRegionOne));
 		verify(beanPostProcessor, never()).doSpy(eq(mockRegionTwo));
@@ -142,14 +142,14 @@ public class RegionSpyingBeanPostProcessorUnitTests {
 		assertThat(new RegionSpyingBeanPostProcessor().isRegionBeanNameMatch("TestRegionBeanName")).isTrue();
 
 		assertThat(new RegionSpyingBeanPostProcessor("TestRegionBeanName")
-			.isRegionBeanNameMatch("TestRegionBeanName")).isTrue();
+		.isRegionBeanNameMatch("TestRegionBeanName")).isTrue();
 	}
 
 	@Test
 	public void isRegionBeanNameMatchReturnsFalse() {
 
 		assertThat(new RegionSpyingBeanPostProcessor("TestRegionBeanName")
-			.isRegionBeanNameMatch("MockRegionBeanName")).isFalse();
+		.isRegionBeanNameMatch("MockRegionBeanName")).isFalse();
 	}
 
 	@Getter

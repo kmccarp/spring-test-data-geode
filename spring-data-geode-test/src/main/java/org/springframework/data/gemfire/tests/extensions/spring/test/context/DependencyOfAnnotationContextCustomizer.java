@@ -40,7 +40,7 @@ public class DependencyOfAnnotationContextCustomizer implements ContextCustomize
 	 */
 	@Override
 	public void customizeContext(@NonNull ConfigurableApplicationContext applicationContext,
-			@NonNull MergedContextConfiguration mergedConfig) {
+	@NonNull MergedContextConfiguration mergedConfig) {
 
 		applicationContext.addBeanFactoryPostProcessor(new DependencyOfBeanFactoryPostProcessor());
 

@@ -93,7 +93,7 @@ import org.springframework.core.annotation.AliasFor;
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.ANNOTATION_TYPE, ElementType.TYPE })
+@Target({ElementType.ANNOTATION_TYPE, ElementType.TYPE})
 @SuppressWarnings("unused")
 public @interface DependencyOf {
 

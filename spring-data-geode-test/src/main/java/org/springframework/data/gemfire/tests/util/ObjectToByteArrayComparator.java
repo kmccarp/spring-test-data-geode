@@ -37,7 +37,7 @@ public class ObjectToByteArrayComparator implements Comparator<Object> {
 	public int compare(Object objectOne, Object objectTwo) {
 
 		return ByteArrayComparator.INSTANCE
-			.compare(fromSerializableToByteArray(objectOne), fromSerializableToByteArray(objectTwo));
+		.compare(fromSerializableToByteArray(objectOne), fromSerializableToByteArray(objectTwo));
 	}
 
 	private Serializable assertSerializable(Object target) {

@@ -58,7 +58,7 @@ public @interface EnableGemFireMockObjects {
 	 * @see org.springframework.context.ApplicationEvent
 	 * @see java.lang.Class
 	 */
-	Class<? extends ApplicationEvent>[] destroyOnEvents() default { AfterTestClassEvent.class };
+	Class<? extends ApplicationEvent>[] destroyOnEvents() default {AfterTestClassEvent.class};
 
 	/**
 	 * Configures whether the mock {@link GemFireCache} created for Unit Testing is a Singleton.

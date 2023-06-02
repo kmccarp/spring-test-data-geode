@@ -72,23 +72,23 @@ public class GemFireMockObjectsConfiguration extends AbstractAnnotationConfigSup
 	private boolean useSingletonCache = DEFAULT_USE_SINGLETON_CACHE;
 
 	@SuppressWarnings("unchecked")
-	private Class<? extends ApplicationEvent>[] destroyEventTypes = new Class[] { AfterTestClassEvent.class };
+	private Class<? extends ApplicationEvent>[] destroyEventTypes = new Class[]{AfterTestClassEvent.class};
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public void setImportMetadata(@NonNull AnnotationMetadata importingClassMetadata) {
 
 		Optional.of(importingClassMetadata)
-			.filter(this::isAnnotationPresent)
-			.map(this::getAnnotationAttributes)
-			.ifPresent(enableGemFireMockObjectsAttributes -> {
+		.filter(this::isAnnotationPresent)
+		.map(this::getAnnotationAttributes)
+		.ifPresent(enableGemFireMockObjectsAttributes -> {
 
-				this.destroyEventTypes = (Class<? extends ApplicationEvent>[])
-					enableGemFireMockObjectsAttributes.getClassArray("destroyOnEvents");
+			this.destroyEventTypes = (Class<? extends ApplicationEvent>[])
+		enableGemFireMockObjectsAttributes.getClassArray("destroyOnEvents");
 
-				this.useSingletonCache =
-					enableGemFireMockObjectsAttributes.getBoolean("useSingletonCache");
-			});
+			this.useSingletonCache =
+		enableGemFireMockObjectsAttributes.getBoolean("useSingletonCache");
+		});
 	}
 
 	@Override
@@ -120,16 +120,16 @@ public class GemFireMockObjectsConfiguration extends AbstractAnnotationConfigSup
 		return new BeanPostProcessor() {
 
 			public @Nullable Object postProcessAfterInitialization(@Nullable Object bean, @NonNull String beanName)
-					throws BeansException {
+			throws BeansException {
 
 				if (bean instanceof GemfireRepository) {
 
 					getRegion(bean)
-						.ifPresent(region -> {
-							if (bean instanceof Advised advisedBean) {
-								advisedBean.addAdvice(0, new CountMethodInterceptor(region));
-							}
-						});
+					.ifPresent(region -> {
+						if (bean instanceof Advised advisedBean) {
+							advisedBean.addAdvice(0, new CountMethodInterceptor(region));
+						}
+					});
 				}
 
 				return bean;
@@ -139,10 +139,10 @@ public class GemFireMockObjectsConfiguration extends AbstractAnnotationConfigSup
 			private Optional<Region<?, ?>> getRegion(@Nullable Object bean) {
 
 				return Optional.ofNullable(bean)
-					.map(AopProxyUtils::getSingletonTarget)
-					.filter(SimpleGemfireRepository.class::isInstance)
-					.map(SimpleGemfireRepository.class::cast)
-					.map(SimpleGemfireRepository::getRegion);
+				.map(AopProxyUtils::getSingletonTarget)
+				.filter(SimpleGemfireRepository.class::isInstance)
+				.map(SimpleGemfireRepository.class::cast)
+				.map(SimpleGemfireRepository::getRegion);
 			}
 		};
 	}

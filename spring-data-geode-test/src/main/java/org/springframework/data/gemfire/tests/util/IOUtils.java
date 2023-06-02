@@ -52,7 +52,7 @@ public abstract class IOUtils {
 
 				if (log.isLoggable(Level.FINE)) {
 					log.fine(String.format("Failed to close the Closeable object (%1$s) due to an I/O error:%n%2$s",
-						closeable, ThrowableUtils.toString(cause)));
+					closeable, ThrowableUtils.toString(cause)));
 				}
 			}
 		}

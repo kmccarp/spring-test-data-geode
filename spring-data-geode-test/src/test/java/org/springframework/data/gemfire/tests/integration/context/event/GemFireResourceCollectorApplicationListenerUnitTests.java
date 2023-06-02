@@ -83,12 +83,12 @@ public class GemFireResourceCollectorApplicationListenerUnitTests {
 		Iterable<Class<? extends ApplicationEvent>> eventTypes = Collections.singleton(AfterTestMethodEvent.class);
 
 		GemFireResourceCollectorApplicationListener listener =
-			new GemFireResourceCollectorApplicationListener(searchDirectory, eventTypes);
+		new GemFireResourceCollectorApplicationListener(searchDirectory, eventTypes);
 
 		assertThat(listener).isNotNull();
 		assertThat(listener.getApplicationContext().orElse(null)).isNull();
 		assertThat(listener.getConfiguredGemFireResourceCollectorEventTypes())
-			.containsExactly(AfterTestMethodEvent.class);
+		.containsExactly(AfterTestMethodEvent.class);
 		assertThat(listener.getLogger()).isNotNull();
 		assertThat(listener.getLogger().getName()).isEqualTo(GemFireResourceCollectorApplicationListener.class.getName());
 		assertThat(listener.isTryCleanDiskStoreFilesEnabled()).isFalse();
@@ -100,18 +100,18 @@ public class GemFireResourceCollectorApplicationListenerUnitTests {
 	public void createNewGemFireResourceCollectorApplicationListener() {
 
 		GemFireResourceCollectorApplicationListener listener =
-			GemFireResourceCollectorApplicationListener.create(AfterTestExecutionEvent.class)
-				.tryCleanDiskStoreFiles(true);
+		GemFireResourceCollectorApplicationListener.create(AfterTestExecutionEvent.class)
+	.tryCleanDiskStoreFiles(true);
 
 		assertThat(listener).isNotNull();
 		assertThat(listener.getApplicationContext().orElse(null)).isNull();
 		assertThat(listener.getConfiguredGemFireResourceCollectorEventTypes())
-			.containsExactly(AfterTestExecutionEvent.class);
+		.containsExactly(AfterTestExecutionEvent.class);
 		assertThat(listener.getLogger()).isNotNull();
 		assertThat(listener.getLogger().getName()).isEqualTo(GemFireResourceCollectorApplicationListener.class.getName());
 		assertThat(listener.isTryCleanDiskStoreFilesEnabled()).isTrue();
 		assertThat(listener.getSearchDirectory())
-			.isEqualTo(GemFireResourceCollectorApplicationListener.DEFAULT_SEARCH_DIRECTORY);
+		.isEqualTo(GemFireResourceCollectorApplicationListener.DEFAULT_SEARCH_DIRECTORY);
 	}
 
 	@Test
@@ -150,7 +150,7 @@ public class GemFireResourceCollectorApplicationListenerUnitTests {
 
 		verify(listener, times(1)).isGemFireResourceCollectorEvent(eq(mockApplicationEvent));
 		verify(listener, times(1))
-			.collectGemFireResources(eq(GemFireResourceCollectorApplicationListener.DEFAULT_SEARCH_DIRECTORY));
+		.collectGemFireResources(eq(GemFireResourceCollectorApplicationListener.DEFAULT_SEARCH_DIRECTORY));
 		verify(listener, times(1)).isTryCleanDiskStoreFilesEnabled();
 		verify(listener, times(1)).collectGemFireDiskStoreFiles();
 	}
@@ -161,7 +161,7 @@ public class GemFireResourceCollectorApplicationListenerUnitTests {
 		AfterTestClassEvent mockEvent = mock(AfterTestClassEvent.class);
 
 		assertThat(GemFireResourceCollectorApplicationListener.create()
-			.isGemFireResourceCollectorEvent(mockEvent)).isTrue();
+		.isGemFireResourceCollectorEvent(mockEvent)).isTrue();
 	}
 
 	@Test
@@ -170,7 +170,7 @@ public class GemFireResourceCollectorApplicationListenerUnitTests {
 		ApplicationEvent mockEvent = mock(AfterTestMethodEventSubType.class);
 
 		assertThat(GemFireResourceCollectorApplicationListener.create(AfterTestMethodEvent.class)
-			.isGemFireResourceCollectorEvent(mockEvent)).isTrue();
+		.isGemFireResourceCollectorEvent(mockEvent)).isTrue();
 	}
 
 	@Test
@@ -179,7 +179,7 @@ public class GemFireResourceCollectorApplicationListenerUnitTests {
 		ApplicationEvent mockEvent = mock(AfterTestClassEvent.class);
 
 		assertThat(GemFireResourceCollectorApplicationListener.create(AfterTestMethodEvent.class)
-			.isGemFireResourceCollectorEvent(mockEvent)).isFalse();
+		.isGemFireResourceCollectorEvent(mockEvent)).isFalse();
 	}
 
 	@Test

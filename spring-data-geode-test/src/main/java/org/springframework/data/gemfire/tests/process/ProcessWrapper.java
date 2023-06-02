@@ -93,8 +93,8 @@ public class ProcessWrapper {
 		Assert.notNull(process, "Process is required");
 
 		Assert.notNull(processConfiguration, "The context and configuration metadata providing details"
-			+ " about the environment in which the process is running and how the process was configured and executed"
-			+ " is required");
+		+ " about the environment in which the process is running and how the process was configured and executed"
+		+ " is required");
 
 		this.process = process;
 		this.processConfiguration = processConfiguration;
@@ -105,11 +105,11 @@ public class ProcessWrapper {
 	private void init() {
 
 		newThread("Process OUT Stream Reader Thread",
-			newProcessInputStreamReaderRunnable(process.getInputStream())).start();
+		newProcessInputStreamReaderRunnable(process.getInputStream())).start();
 
 		if (!isRedirectingErrorStream()) {
 			newThread("Process ERR Stream Reader Thread",
-				newProcessInputStreamReaderRunnable(process.getErrorStream())).start();
+			newProcessInputStreamReaderRunnable(process.getErrorStream())).start();
 		}
 	}
 
@@ -232,14 +232,14 @@ public class ProcessWrapper {
 	public @NonNull String readLogFile() throws IOException {
 
 		File[] logFiles = FileSystemUtils.listFiles(getWorkingDirectory(),
-			path -> (path != null && (path.isDirectory() || path.getAbsolutePath().endsWith(".log"))));
+		path -> (path != null && (path.isDirectory() || path.getAbsolutePath().endsWith(".log"))));
 
 		if (logFiles.length > 0) {
 			return readLogFile(logFiles[0]);
 		}
 		else {
 			throw new FileNotFoundException(String.format("No log files found in process's [%d] working directory [%s]",
-				safeGetPid(), getWorkingDirectory()));
+			safeGetPid(), getWorkingDirectory()));
 		}
 	}
 
@@ -340,7 +340,7 @@ public class ProcessWrapper {
 			catch (TimeoutException cause) {
 				exitValue = -1;
 				this.log.warning(String.format("Process [%1$d] did not stop within the allotted timeout of %2$d seconds%n",
-					pid, TimeUnit.MILLISECONDS.toSeconds(milliseconds)));
+				pid, TimeUnit.MILLISECONDS.toSeconds(milliseconds)));
 			}
 			catch (Exception ignore) {
 				// handles CancellationException, ExecutionException

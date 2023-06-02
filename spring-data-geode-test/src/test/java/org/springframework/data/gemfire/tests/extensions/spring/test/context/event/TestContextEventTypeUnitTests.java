@@ -48,13 +48,13 @@ public class TestContextEventTypeUnitTests {
 	public void fromTestContextEventToEnum() {
 
 		List<TestContextEvent> events = Arrays.asList(
-			mock(BeforeTestClassEvent.class),
-			mock(PrepareTestInstanceEvent.class),
-			mock(BeforeTestMethodEvent.class),
-			mock(BeforeTestExecutionEvent.class),
-			mock(AfterTestExecutionEvent.class),
-			mock(AfterTestMethodEvent.class),
-			mock(AfterTestClassEvent.class)
+		mock(BeforeTestClassEvent.class),
+		mock(PrepareTestInstanceEvent.class),
+		mock(BeforeTestMethodEvent.class),
+		mock(BeforeTestExecutionEvent.class),
+		mock(AfterTestExecutionEvent.class),
+		mock(AfterTestMethodEvent.class),
+		mock(AfterTestClassEvent.class)
 		);
 
 		events.forEach(event -> {

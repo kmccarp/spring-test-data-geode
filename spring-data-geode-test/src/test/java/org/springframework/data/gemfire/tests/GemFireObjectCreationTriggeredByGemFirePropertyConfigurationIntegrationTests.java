@@ -51,7 +51,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ContextConfiguration
 @SuppressWarnings("unused")
 public class GemFireObjectCreationTriggeredByGemFirePropertyConfigurationIntegrationTests
-		extends IntegrationTestsSupport {
+extends IntegrationTestsSupport {
 
 	@Autowired
 	private GemFireCache gemfireCache;
@@ -66,6 +66,7 @@ public class GemFireObjectCreationTriggeredByGemFirePropertyConfigurationIntegra
 	@PeerCacheApplication
 	@EnableGemFireMockObjects
 	@EnableSecurity(securityManagerClassName = "org.springframework.data.gemfire.tests.objects.geode.security.TestSecurityManager")
-	static class TestConfiguration { }
+	static class TestConfiguration {
+	}
 
 }

@@ -122,12 +122,12 @@ public abstract class ProcessExecutor {
 	 * @see java.io.File
 	 */
 	public static ProcessWrapper launch(File workingDirectory, String classpath, Class<?> type, String... arguments)
-			throws IOException {
+	throws IOException {
 
 		ProcessBuilder processBuilder = new ProcessBuilder()
-			.command(buildCommand(classpath, type, arguments))
-			.directory(validateDirectory(workingDirectory))
-			.redirectErrorStream(true);
+		.command(buildCommand(classpath, type, arguments))
+		.directory(validateDirectory(workingDirectory))
+		.redirectErrorStream(true);
 
 		Process process = processBuilder.start();
 
@@ -192,10 +192,10 @@ public abstract class ProcessExecutor {
 	protected static Collection<? extends String> getSpringGemFireSystemProperties() {
 
 		return System.getProperties().stringPropertyNames().stream()
-			.filter(property -> property.startsWith(SPRING_DATA_GEMFIRE_SYSTEM_PROPERTY_PREFIX)
-				|| property.startsWith(SPRING_GEMFIRE_SYSTEM_PROPERTY_PREFIX))
-			.map(property -> String.format("-D%1$s=%2$s", property, System.getProperty(property)))
-			.collect(Collectors.toList());
+		.filter(property -> property.startsWith(SPRING_DATA_GEMFIRE_SYSTEM_PROPERTY_PREFIX)
+	|| property.startsWith(SPRING_GEMFIRE_SYSTEM_PROPERTY_PREFIX))
+		.map(property -> String.format("-D%1$s=%2$s", property, System.getProperty(property)))
+		.collect(Collectors.toList());
 	}
 
 	protected static boolean isJvmOption(String option) {
@@ -209,7 +209,7 @@ public abstract class ProcessExecutor {
 	protected static File validateDirectory(File workingDirectory) {
 
 		Assert.isTrue(workingDirectory != null && (workingDirectory.isDirectory() || workingDirectory.mkdirs()),
-			String.format("Failed to create working directory [%s]", workingDirectory));
+		String.format("Failed to create working directory [%s]", workingDirectory));
 
 		return workingDirectory;
 	}

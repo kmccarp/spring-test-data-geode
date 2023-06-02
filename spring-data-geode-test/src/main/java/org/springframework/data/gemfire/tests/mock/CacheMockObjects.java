@@ -56,34 +56,34 @@ public abstract class CacheMockObjects {
 
 	@SuppressWarnings("unchecked")
 	public static <T extends GemFireCache> T mockGemFireCache(T mockGemFireCache, String name,
-			DistributedSystem distributedSystem, ResourceManager resourceManager, Region<?, ?>... regions) {
+	DistributedSystem distributedSystem, ResourceManager resourceManager, Region<?, ?>... regions) {
 
 		T theMockGemFireCache = mockGemFireCache != null ? mockGemFireCache
-			: (T) mock(GemFireCache.class, withSettings().name(name).lenient());
+		: (T) mock(GemFireCache.class, withSettings().name(name).lenient());
 
 		when(theMockGemFireCache.getDistributedSystem()).thenReturn(distributedSystem);
 		when(theMockGemFireCache.getName()).thenReturn(name);
 		when(theMockGemFireCache.getResourceManager()).thenReturn(resourceManager);
 
 		Optional.ofNullable(regions)
-			.filter(it -> it.length != 0)
-			.ifPresent(it ->  when(theMockGemFireCache.rootRegions()).thenReturn(asSet(it)));
+		.filter(it -> it.length != 0)
+		.ifPresent(it -> when(theMockGemFireCache.rootRegions()).thenReturn(asSet(it)));
 
 		return theMockGemFireCache;
 	}
 
 	public static ClientCache mockClientCache(String name, DistributedSystem distributedSystem, ResourceManager resourceManager,
-			Region<?, ?>... regions) {
+	Region<?, ?>... regions) {
 
 		return mockGemFireCache(mock(ClientCache.class, withSettings().name(name).lenient()),
-			name, distributedSystem, resourceManager, regions);
+		name, distributedSystem, resourceManager, regions);
 	}
 
 	public static Cache mockPeerCache(String name, DistributedSystem distributedSystem, ResourceManager resourceManager,
-			Region<?, ?>... regions) {
+	Region<?, ?>... regions) {
 
 		return mockGemFireCache(mock(Cache.class, withSettings().name(name).lenient()),
-			name, distributedSystem, resourceManager, regions);
+		name, distributedSystem, resourceManager, regions);
 	}
 
 	public static DistributedSystem mockDistributedSystem(DistributedMember distributedMember) {
@@ -108,7 +108,7 @@ public abstract class CacheMockObjects {
 	}
 
 	public static ResourceManager mockResourceManager(float criticalHeapPercentage, float criticalOffHeapPercentage,
-			float evictionHeapPercentage, float evictionOffHeapPercentage) {
+	float evictionHeapPercentage, float evictionOffHeapPercentage) {
 
 		ResourceManager mockResourceManager = mock(ResourceManager.class, withSettings().lenient());
 
@@ -129,7 +129,7 @@ public abstract class CacheMockObjects {
 		when(mockRegion.getFullPath()).thenReturn(RegionUtils.toRegionPath(name));
 
 		RegionAttributes<K, V> mockRegionAttributes = mock(RegionAttributes.class,
-			withSettings().name(String.format("%sRegionAttributes", name)).lenient());
+		withSettings().name(String.format("%sRegionAttributes", name)).lenient());
 
 		when(mockRegionAttributes.getDataPolicy()).thenReturn(dataPolicy);
 		when(mockRegion.getAttributes()).thenReturn(mockRegionAttributes);

@@ -86,25 +86,25 @@ public class RegionDataInitializingPostProcessor<T> {
 	public void initializeTargetRegionWithData(@NonNull ContextRefreshedEvent event) {
 
 		resolveTargetRegion(event)
-			.ifPresent(resolvedTargetRegion -> resolvedTargetRegion.putAll(getRegionData()));
+		.ifPresent(resolvedTargetRegion -> resolvedTargetRegion.putAll(getRegionData()));
 	}
 
 	protected Optional<ApplicationContext> resolveApplicationContext(@NonNull ContextRefreshedEvent event) {
 
 		return Optional.ofNullable(event)
-			.map(ContextRefreshedEvent::getApplicationContext)
-			.map(Optional::of)
-			.orElseThrow(() ->
-				newIllegalStateException("Failed to resolve ApplicationContext from ContextRefreshedEvent [%s]", event));
+		.map(ContextRefreshedEvent::getApplicationContext)
+		.map(Optional::of)
+		.orElseThrow(() ->
+	newIllegalStateException("Failed to resolve ApplicationContext from ContextRefreshedEvent [%s]", event));
 	}
 
 	@SuppressWarnings("unchecked")
 	protected Optional<Region<Object, T>> resolveTargetRegion(@NonNull ContextRefreshedEvent event) {
 
 		Region<Object, T> resolvedTargetRegion = resolveApplicationContext(event)
-			.map(applicationContext -> applicationContext.getBean(getRegionBeanName(), Region.class))
-			.orElseThrow(() -> newIllegalStateException("Failed to resolve Region bean [%s] from ApplicationContext",
-				getRegionBeanName()));
+		.map(applicationContext -> applicationContext.getBean(getRegionBeanName(), Region.class))
+		.orElseThrow(() -> newIllegalStateException("Failed to resolve Region bean [%s] from ApplicationContext",
+	getRegionBeanName()));
 
 		return Optional.of(resolvedTargetRegion);
 	}
@@ -115,10 +115,10 @@ public class RegionDataInitializingPostProcessor<T> {
 	}
 
 	protected RegionDataInitializingPostProcessor<T> useEntityIdentifierFunction(
-		@NonNull Function<T, Object> entityIdentifierFunction) {
+	@NonNull Function<T, Object> entityIdentifierFunction) {
 
 		Assert.notNull(entityIdentifierFunction,
-			"The Function used to resolve the entity's identify (identifier) must not be null");
+		"The Function used to resolve the entity's identify (identifier) must not be null");
 
 		this.entityIdentifierFunction = entityIdentifierFunction;
 
@@ -136,7 +136,7 @@ public class RegionDataInitializingPostProcessor<T> {
 		}
 
 		public RegionDataInitializingPostProcessor<T> useAsEntityIdentifier(
-				@NonNull Function<T, Object> entityIdentifierFunction) {
+		@NonNull Function<T, Object> entityIdentifierFunction) {
 
 			return this.postProcessor.useEntityIdentifierFunction(entityIdentifierFunction);
 		}

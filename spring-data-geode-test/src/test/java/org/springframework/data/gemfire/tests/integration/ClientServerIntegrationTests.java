@@ -60,11 +60,11 @@ public class ClientServerIntegrationTests extends ForkingClientServerIntegration
 	@Resource(name = "Example")
 	private Region<Object, Object> example;
 
- 	@Test
+	@Test
 	public void clientServerInteractionSuccessful() {
 
- 		assertThat(this.example.put(1L, "test")).isNull();
- 		assertThat(this.example.get(1L)).isEqualTo("test");
+		assertThat(this.example.put(1L, "test")).isNull();
+		assertThat(this.example.get(1L)).isEqualTo("test");
 	}
 
 	@ClientCacheApplication(logLevel = GEODE_LOG_LEVEL)
@@ -90,7 +90,7 @@ public class ClientServerIntegrationTests extends ForkingClientServerIntegration
 		public static void main(String[] args) {
 
 			AnnotationConfigApplicationContext applicationContext =
-				new AnnotationConfigApplicationContext(TestGeodeServerConfiguration.class);
+			new AnnotationConfigApplicationContext(TestGeodeServerConfiguration.class);
 
 			applicationContext.registerShutdownHook();
 		}

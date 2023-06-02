@@ -34,7 +34,8 @@ import org.apache.shiro.authz.AuthorizationException;
 public abstract class AbstractSecurityManager implements org.apache.geode.security.SecurityManager {
 
 	@Override
-	public void init(Properties securityProps) { }
+	public void init(Properties securityProps) {
+	}
 
 	@Override
 	public Object authenticate(Properties credentials) throws AuthenticationFailedException {
@@ -47,6 +48,7 @@ public abstract class AbstractSecurityManager implements org.apache.geode.securi
 	}
 
 	@Override
-	public void close() { }
+	public void close() {
+	}
 
 }

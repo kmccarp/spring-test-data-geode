@@ -37,7 +37,7 @@ public class IdentityHashCodeComparator implements Comparator<Object> {
 
 		// Cannot use subtraction; Must be careful of overflow/underflow.
 		return objectOneHashCode < objectTwoHashCode ? -1
-			: objectOneHashCode > objectTwoHashCode ? 1
-			: 0;
+		: objectOneHashCode > objectTwoHashCode ? 1
+		: 0;
 	}
 }

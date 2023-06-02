@@ -72,7 +72,7 @@ public enum TestContextEventType {
 	TestContextEventType(Class<? extends TestContextEvent> eventType) {
 
 		Assert.notNull(eventType,
-			"The Class type of the TestContextEvent for this enumerated value must not be null");
+		"The Class type of the TestContextEvent for this enumerated value must not be null");
 
 		this.eventType = eventType;
 	}

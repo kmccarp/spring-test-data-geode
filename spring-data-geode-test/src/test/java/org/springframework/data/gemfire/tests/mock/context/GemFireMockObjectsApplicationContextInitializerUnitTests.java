@@ -52,12 +52,12 @@ public class GemFireMockObjectsApplicationContextInitializerUnitTests {
 		doReturn(mockBeanFactory).when(mockApplicationContext).getBeanFactory();
 
 		GemFireMockObjectsApplicationContextInitializer initializer =
-			new GemFireMockObjectsApplicationContextInitializer();
+		new GemFireMockObjectsApplicationContextInitializer();
 
 		initializer.initialize(mockApplicationContext);
 
 		verify(mockApplicationContext, times(1)).getBeanFactory();
 		verify(mockBeanFactory, times(1))
-			.addBeanPostProcessor(isA(GemFireMockObjectsBeanPostProcessor.class));
+		.addBeanPostProcessor(isA(GemFireMockObjectsBeanPostProcessor.class));
 	}
 }

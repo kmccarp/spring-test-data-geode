@@ -52,7 +52,7 @@ public abstract class StackTraceUtils extends ThreadUtils {
 		String[] idElements = id.split("-");
 
 		return String.format("%s%s%s", idElements[0].substring(0, 3), idElements[3],
-			idElements[idElements.length - 1].substring(idElements[idElements.length - 1].length() - 3));
+		idElements[idElements.length - 1].substring(idElements[idElements.length - 1].length() - 3));
 	}
 
 	public static @NonNull StackTraceElement getCaller() {
@@ -70,14 +70,14 @@ public abstract class StackTraceUtils extends ThreadUtils {
 	public static @NonNull String getCallerSimpleName(@NonNull StackTraceElement element) {
 
 		String resolvedClassName = safeResolveClass(element)
-			.map(Class::getSimpleName)
-			.orElseGet(() -> {
+		.map(Class::getSimpleName)
+		.orElseGet(() -> {
 
-				String className = element.getClassName();
-				int index = element.getClassName().lastIndexOf(".");
+			String className = element.getClassName();
+			int index = element.getClassName().lastIndexOf(".");
 
-				return index > -1 ? className.substring(index) : className;
-			});
+			return index > -1 ? className.substring(index) : className;
+		});
 
 		return String.format("%1$%s.%2$s", resolvedClassName, element.getMethodName());
 	}
@@ -89,10 +89,10 @@ public abstract class StackTraceUtils extends ThreadUtils {
 	public static @Nullable StackTraceElement getTestCaller(@NonNull Thread thread) {
 
 		return Arrays.stream(thread.getStackTrace())
-			.filter(StackTraceUtils::isTestSuiteClass)
-			.filter(StackTraceUtils::isTestCaseMethod)
-			.findFirst()
-			.orElse(null);
+		.filter(StackTraceUtils::isTestSuiteClass)
+		.filter(StackTraceUtils::isTestCaseMethod)
+		.findFirst()
+		.orElse(null);
 	}
 
 	private static boolean isTestCaseMethod(StackTraceElement element) {
@@ -102,7 +102,8 @@ public abstract class StackTraceUtils extends ThreadUtils {
 		try {
 			result |= resolveMethod(element).isAnnotationPresent(org.junit.Test.class);
 		}
-		catch (ClassNotFoundException | NoSuchMethodException ignore) { }
+		catch (ClassNotFoundException | NoSuchMethodException ignore) {
+		}
 
 		return result;
 	}
@@ -114,7 +115,8 @@ public abstract class StackTraceUtils extends ThreadUtils {
 		try {
 			result |= resolveClass(element).isAssignableFrom(junit.framework.TestCase.class);
 		}
-		catch (ClassNotFoundException ignore) { }
+		catch (ClassNotFoundException ignore) {
+		}
 
 		return result;
 	}
@@ -124,8 +126,8 @@ public abstract class StackTraceUtils extends ThreadUtils {
 		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
 
 		List<StackTraceElement> resolvedStackTrace = Arrays.stream(stackTrace)
-			.filter(stackTraceElementFilter())
-			.collect(Collectors.toList());
+		.filter(stackTraceElementFilter())
+		.collect(Collectors.toList());
 
 		StringWriter writer = new StringWriter();
 
@@ -160,7 +162,7 @@ public abstract class StackTraceUtils extends ThreadUtils {
 	}
 
 	public static Method resolveMethod(StackTraceElement element)
-			throws ClassNotFoundException, NoSuchMethodException {
+	throws ClassNotFoundException, NoSuchMethodException {
 
 		return resolveClass(element).getMethod(element.getMethodName());
 	}

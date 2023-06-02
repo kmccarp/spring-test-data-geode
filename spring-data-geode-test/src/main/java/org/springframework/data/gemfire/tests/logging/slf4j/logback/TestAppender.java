@@ -46,8 +46,8 @@ public class TestAppender extends AppenderBase<ILoggingEvent> implements Appende
 	public static TestAppender getInstance() {
 
 		return Optional.ofNullable(INSTANCE.get())
-			.orElseThrow(() -> newIllegalStateException("[%s] was not properly configured",
-				TestAppender.class.getName()));
+		.orElseThrow(() -> newIllegalStateException("[%s] was not properly configured",
+	TestAppender.class.getName()));
 	}
 
 	public TestAppender() {
@@ -58,9 +58,9 @@ public class TestAppender extends AppenderBase<ILoggingEvent> implements Appende
 	protected void append(ILoggingEvent event) {
 
 		Optional.ofNullable(event)
-			.map(ILoggingEvent::getFormattedMessage)
-			.filter(StringUtils::hasText)
-			.ifPresent(logMessages::push);
+		.map(ILoggingEvent::getFormattedMessage)
+		.filter(StringUtils::hasText)
+		.ifPresent(logMessages::push);
 	}
 
 	public String lastLogMessage() {

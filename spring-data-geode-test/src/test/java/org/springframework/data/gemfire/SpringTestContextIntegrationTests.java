@@ -52,7 +52,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SpringTestContextIntegrationTests {
 
 	private static final Set<Integer> applicationContextsIdentityHashCodes =
-		Collections.synchronizedSet(new HashSet<>());
+	Collections.synchronizedSet(new HashSet<>());
 
 	@Autowired
 	private ApplicationContext applicationContext;
@@ -84,6 +84,7 @@ public class SpringTestContextIntegrationTests {
 	}
 
 	@Configuration
-	static class TestConfiguration { }
+	static class TestConfiguration {
+	}
 
 }

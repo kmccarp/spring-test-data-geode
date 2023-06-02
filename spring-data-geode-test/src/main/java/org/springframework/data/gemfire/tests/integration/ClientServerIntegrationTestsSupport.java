@@ -123,31 +123,31 @@ public abstract class ClientServerIntegrationTestsSupport extends IntegrationTes
 	}
 
 	protected static @Nullable ProcessWrapper run(File workingDirectory, Class<?> type, String... arguments)
-			throws IOException {
+	throws IOException {
 
 		return isProcessRunAuto() ? launch(createDirectory(workingDirectory), type, arguments) : null;
 	}
 
 	protected static @Nullable ProcessWrapper run(String classpath, Class<?> type, String... arguments)
-			throws IOException {
+	throws IOException {
 
 		return run(createDirectory(asDirectoryName(type)), classpath, type, arguments);
 	}
 
 	protected static @Nullable ProcessWrapper run(File workingDirectory, String classpath, Class<?> type,
-			String... arguments) throws IOException {
+	String... arguments) throws IOException {
 
 		return isProcessRunAuto() ? launch(createDirectory(workingDirectory), classpath, type, arguments) : null;
 	}
 
 	protected static @NonNull AnnotationConfigApplicationContext runSpringApplication(Class<?> annotatedClass,
-			String... args) {
+	String... args) {
 
 		return runSpringApplication(asArray(annotatedClass), args);
 	}
 
 	protected static @NonNull AnnotationConfigApplicationContext runSpringApplication(Class<?>[] annotatedClasses,
-			String... args) {
+	String... args) {
 
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
@@ -165,18 +165,18 @@ public abstract class ClientServerIntegrationTestsSupport extends IntegrationTes
 	protected static boolean stop(@Nullable ProcessWrapper process, long duration) {
 
 		return Optional.ofNullable(process)
-			.map(it -> {
+		.map(it -> {
 
-				it.stop(duration);
+			it.stop(duration);
 
-				if (it.isNotRunning() && isDeleteDirectoryOnExit()) {
-					removeRecursiveDirectory(it.getWorkingDirectory());
-				}
+			if (it.isNotRunning() && isDeleteDirectoryOnExit()) {
+				removeRecursiveDirectory(it.getWorkingDirectory());
+			}
 
-				return it.isRunning();
+			return it.isRunning();
 
-			})
-			.orElse(true);
+		})
+		.orElse(true);
 	}
 
 	protected static boolean waitForCacheServerToStart(@NonNull CacheServer cacheServer) {
@@ -205,7 +205,8 @@ public abstract class ClientServerIntegrationTestsSupport extends IntegrationTes
 					connected.set(true);
 				}
 			}
-			catch (IOException ignore) { }
+			catch (IOException ignore) {
+			}
 			finally {
 				SocketUtils.close(socket);
 			}

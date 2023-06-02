@@ -53,7 +53,7 @@ public class DestroyGemFireMockObjectsApplicationListenerUnitTests {
 	public void configureListener() {
 
 		Iterable<Class<? extends ApplicationEvent>> destroyEvents =
-			Arrays.asList(ContextClosedEvent.class, AfterTestExecutionEvent.class);
+		Arrays.asList(ContextClosedEvent.class, AfterTestExecutionEvent.class);
 
 		this.listener = spy(new DestroyGemFireMockObjectsApplicationListener(destroyEvents));
 

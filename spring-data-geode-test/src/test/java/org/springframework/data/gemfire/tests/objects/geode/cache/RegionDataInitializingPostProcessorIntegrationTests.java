@@ -85,9 +85,9 @@ public class RegionDataInitializingPostProcessorIntegrationTests extends Integra
 		RegionDataInitializingPostProcessor<User> usersRegionDataInitializer() {
 
 			return RegionDataInitializingPostProcessor.<User>withRegion("Users")
-				.useAsEntityIdentifier(User::getName)
-				.store(User.with("jonDoe"))
-				.store(User.with("janeDoe"));
+			.useAsEntityIdentifier(User::getName)
+			.store(User.with("jonDoe"))
+			.store(User.with("janeDoe"));
 		}
 	}
 

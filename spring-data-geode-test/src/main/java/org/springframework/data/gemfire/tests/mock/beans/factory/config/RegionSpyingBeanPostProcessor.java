@@ -56,9 +56,9 @@ public class RegionSpyingBeanPostProcessor implements BeanPostProcessor {
 	public RegionSpyingBeanPostProcessor(@NonNull Iterable<String> regionBeanNames) {
 
 		this.regionBeanNames =
-			StreamSupport.stream(CollectionUtils.nullSafeIterable(regionBeanNames).spliterator(), false)
-				.filter(StringUtils::hasText)
-				.collect(Collectors.toSet());
+		StreamSupport.stream(CollectionUtils.nullSafeIterable(regionBeanNames).spliterator(), false)
+	.filter(StringUtils::hasText)
+	.collect(Collectors.toSet());
 	}
 
 	protected boolean isRegion(@Nullable Object target) {
@@ -68,7 +68,7 @@ public class RegionSpyingBeanPostProcessor implements BeanPostProcessor {
 	protected boolean isRegionBeanNameMatch(@NonNull String beanName) {
 
 		return this.regionBeanNames.isEmpty()
-			|| (StringUtils.hasText(beanName) && this.regionBeanNames.contains(beanName));
+		|| (StringUtils.hasText(beanName) && this.regionBeanNames.contains(beanName));
 	}
 
 	/**

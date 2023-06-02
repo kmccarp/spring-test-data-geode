@@ -44,8 +44,8 @@ import org.apache.geode.cache.wan.GatewaySender;
 public abstract class GatewayMockObjects extends MockObjectsSupport {
 
 	public static GatewayReceiver mockGatewayReceiver(String bindAddress, int endPort, String host,
-			String hostnameForSenders, boolean manualStart, int maxTimeBetweenPings, int port,
-			boolean initialRunningState, CacheServer server, int socketBufferSize, int startPort) throws IOException {
+	String hostnameForSenders, boolean manualStart, int maxTimeBetweenPings, int port,
+	boolean initialRunningState, CacheServer server, int socketBufferSize, int startPort) throws IOException {
 
 		AtomicBoolean running = new AtomicBoolean(initialRunningState);
 
@@ -70,10 +70,10 @@ public abstract class GatewayMockObjects extends MockObjectsSupport {
 	}
 
 	public static GatewaySender mockGatewaySender(String id, int alertThreshold, boolean batchConflationEnabled,
-			int batchSize, int batchTimeInterval, String diskStoreName, boolean diskSynchronous, int dispatcherThreads,
-			int maxQueueMemory, int maxParallelismForReplicatedRegion, GatewaySender.OrderPolicy orderPolicy,
-			boolean parallel, boolean persistent, int remoteDistributedSystemId, boolean initialRunningState,
-			int socketBufferSize, int socketReadTimeout) {
+	int batchSize, int batchTimeInterval, String diskStoreName, boolean diskSynchronous, int dispatcherThreads,
+	int maxQueueMemory, int maxParallelismForReplicatedRegion, GatewaySender.OrderPolicy orderPolicy,
+	boolean parallel, boolean persistent, int remoteDistributedSystemId, boolean initialRunningState,
+	int socketBufferSize, int socketReadTimeout) {
 
 		AtomicBoolean paused = new AtomicBoolean(false);
 		AtomicBoolean running = new AtomicBoolean(initialRunningState);

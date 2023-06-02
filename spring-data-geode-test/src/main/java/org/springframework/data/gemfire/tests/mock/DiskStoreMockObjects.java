@@ -39,8 +39,8 @@ import org.apache.geode.cache.DiskStore;
 public abstract class DiskStoreMockObjects extends MockObjectsSupport {
 
 	public static DiskStore mockDiskStore(String name, boolean allowForceCompaction, boolean autoCompact,
-			int compactionThreshold, File[] diskDirectories, int[] diskDirectorySizes, float diskUsageCriticalPercentage,
-			float diskUsageWarningPercentage, long maxOplogSize, int queueSize, long timeInterval, int writeBufferSize) {
+	int compactionThreshold, File[] diskDirectories, int[] diskDirectorySizes, float diskUsageCriticalPercentage,
+	float diskUsageWarningPercentage, long maxOplogSize, int queueSize, long timeInterval, int writeBufferSize) {
 
 		DiskStore mockDiskStore = mock(DiskStore.class, withSettings().name(name).lenient());
 

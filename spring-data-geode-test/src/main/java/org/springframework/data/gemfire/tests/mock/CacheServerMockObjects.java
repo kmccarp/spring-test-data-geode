@@ -50,9 +50,9 @@ public abstract class CacheServerMockObjects extends MockObjectsSupport {
 
 	// TODO mock ClientSessions and InterestRegistrationListeners
 	public static CacheServer mockCacheServer(String bindAddress, ClientSubscriptionConfig clientSubscriptionConfig,
-			String hostnameForClients, long loadPollInterval, ServerLoadProbe serverLoadProbe, int maxConnections,
-			int maxMessageCount, int maxThreads, int maxTimeBetweenPings, int messageTimeToLive, int port,
-			boolean running, int socketBufferSize, boolean tcpNoDelay) throws Exception {
+	String hostnameForClients, long loadPollInterval, ServerLoadProbe serverLoadProbe, int maxConnections,
+	int maxMessageCount, int maxThreads, int maxTimeBetweenPings, int messageTimeToLive, int port,
+	boolean running, int socketBufferSize, boolean tcpNoDelay) throws Exception {
 
 		AtomicBoolean runningState = new AtomicBoolean(running);
 
@@ -73,7 +73,7 @@ public abstract class CacheServerMockObjects extends MockObjectsSupport {
 		when(mockCacheServer.getTcpNoDelay()).thenReturn(tcpNoDelay);
 
 		Optional.ofNullable(clientSubscriptionConfig)
-			.ifPresent(it -> when(mockCacheServer.getClientSubscriptionConfig()).thenReturn(it));
+		.ifPresent(it -> when(mockCacheServer.getClientSubscriptionConfig()).thenReturn(it));
 
 		Optional.ofNullable(serverLoadProbe).ifPresent(it -> when(mockCacheServer.getLoadProbe()).thenReturn(it));
 
@@ -93,10 +93,10 @@ public abstract class CacheServerMockObjects extends MockObjectsSupport {
 	}
 
 	public static ClientSubscriptionConfig mockClientSubscriptionConfig(int capacity, String diskStoreName,
-			String evictionPolicy) {
+	String evictionPolicy) {
 
 		ClientSubscriptionConfig mockClientSubscriptionConfig =
-			mock(ClientSubscriptionConfig.class, withSettings().lenient());
+		mock(ClientSubscriptionConfig.class, withSettings().lenient());
 
 		when(mockClientSubscriptionConfig.getCapacity()).thenReturn(capacity);
 		when(mockClientSubscriptionConfig.getDiskStoreName()).thenReturn(diskStoreName);
@@ -107,10 +107,10 @@ public abstract class CacheServerMockObjects extends MockObjectsSupport {
 
 	// TODO file Apache Geode JIRA ticket to refactor the final ServerLoad class into a proper interface!
 	public static ServerLoad mockServerLoad(float connectionLoad, float loadPerConnection,
-			float loadPerSubscriptionConnection, float subscriptionConnectionLoad) {
+	float loadPerSubscriptionConnection, float subscriptionConnectionLoad) {
 
 		return new ServerLoad(connectionLoad, loadPerConnection, subscriptionConnectionLoad,
-			loadPerSubscriptionConnection);
+		loadPerSubscriptionConnection);
 	}
 
 	public static ServerLoadProbe mockServerLoadProbe() {
@@ -118,7 +118,7 @@ public abstract class CacheServerMockObjects extends MockObjectsSupport {
 	}
 
 	public static ServerMetrics mockServerMetrics(int clientCount, int connectionCount, int maxConnections,
-			int subscriptionConnectionCount) {
+	int subscriptionConnectionCount) {
 
 		ServerMetrics mockServerMetrics = mock(ServerMetrics.class, withSettings().lenient());
 

@@ -50,7 +50,7 @@ public class CloseApplicationContextAfterTestClassTestExecutionListener extends 
 	protected static final String SPRING_TEST_CONTEXT_CLOSE_PROPERTY = "spring.test.context.close";
 
 	protected static final DirtiesContext.HierarchyMode DEFAULT_HIERARCHY_MODE =
-		DirtiesContext.HierarchyMode.CURRENT_LEVEL;
+	DirtiesContext.HierarchyMode.CURRENT_LEVEL;
 
 	private final AtomicReference<Boolean> springTestContextCloseEnabled = new AtomicReference<>();
 
@@ -64,7 +64,7 @@ public class CloseApplicationContextAfterTestClassTestExecutionListener extends 
 
 	protected boolean isSpringTestContextCloseEnabled() {
 		return this.springTestContextCloseEnabled.updateAndGet(closeEnabled -> closeEnabled != null ? closeEnabled
-			: getSpringTestContextCloseEnabledResolvingFunction().apply(DEFAULT_SPRING_TEST_CONTEXT_CLOSED));
+		: getSpringTestContextCloseEnabledResolvingFunction().apply(DEFAULT_SPRING_TEST_CONTEXT_CLOSED));
 	}
 
 	@SuppressWarnings("all")

@@ -47,7 +47,7 @@ import org.springframework.test.context.event.TestContextEvent;
 public class DestroyGemFireMockObjectsTestExecutionListener implements TestExecutionListener {
 
 	private static final AtomicReference<DestroyGemFireMockObjectsTestExecutionListener> instance =
-		new AtomicReference<>(null);
+	new AtomicReference<>(null);
 
 	/**
 	 * Returns an {@link Optional} reference to the constructed {@link DestroyGemFireMockObjectsTestExecutionListener}
@@ -61,7 +61,7 @@ public class DestroyGemFireMockObjectsTestExecutionListener implements TestExecu
 	}
 
 	private final Set<TestContextEventType> destroyOnEventTypes =
-		Collections.synchronizedSet(new HashSet<>(TestContextEventType.values().length));
+	Collections.synchronizedSet(new HashSet<>(TestContextEventType.values().length));
 
 	/**
 	 * Constructs a new instance of the {@link DestroyGemFireMockObjectsTestExecutionListener}.
@@ -84,7 +84,7 @@ public class DestroyGemFireMockObjectsTestExecutionListener implements TestExecu
 	public boolean disableDestroyOnEventType(@Nullable TestContextEventType eventType) {
 
 		return eventType != null
-			&& (this.destroyOnEventTypes.remove(eventType) || !this.destroyOnEventTypes.contains(eventType));
+		&& (this.destroyOnEventTypes.remove(eventType) || !this.destroyOnEventTypes.contains(eventType));
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class DestroyGemFireMockObjectsTestExecutionListener implements TestExecu
 	public boolean enableDestroyOnEventType(@Nullable TestContextEventType eventType) {
 
 		return eventType != null
-			&& (this.destroyOnEventTypes.add(eventType) || this.destroyOnEventTypes.contains(eventType));
+		&& (this.destroyOnEventTypes.add(eventType) || this.destroyOnEventTypes.contains(eventType));
 	}
 
 	/**

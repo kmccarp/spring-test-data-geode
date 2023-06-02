@@ -44,13 +44,13 @@ public class SslConfigurationIntegrationTests {
 		Method getInstance = ReflectionUtils.findMethod(SSLConfigurationFactory.class, "getInstance");
 
 		return Optional.ofNullable(getInstance)
-			.map(method -> {
+		.map(method -> {
 
-				ReflectionUtils.makeAccessible(method);
+			ReflectionUtils.makeAccessible(method);
 
-				return (SSLConfigurationFactory) ReflectionUtils.invokeMethod(method, null);
-			})
-			.orElse(null);
+			return (SSLConfigurationFactory) ReflectionUtils.invokeMethod(method, null);
+		})
+		.orElse(null);
 	}
 
 	@Test

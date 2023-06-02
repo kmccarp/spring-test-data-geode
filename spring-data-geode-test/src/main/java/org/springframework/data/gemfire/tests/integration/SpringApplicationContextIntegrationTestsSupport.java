@@ -47,7 +47,7 @@ import org.springframework.lang.NonNull;
  */
 @SuppressWarnings("unused")
 public abstract class SpringApplicationContextIntegrationTestsSupport extends IntegrationTestsSupport
-		implements ApplicationEventPublisherAware {
+implements ApplicationEventPublisherAware {
 
 	@After
 	public void closeApplicationContext() {
@@ -59,8 +59,8 @@ public abstract class SpringApplicationContextIntegrationTestsSupport extends In
 	}
 
 	protected ConfigurableApplicationContext newApplicationContext(
-			Function<ConfigurableApplicationContext, ConfigurableApplicationContext> applicationContextInitializer,
-			Class<?>... annotatedClasses) {
+	Function<ConfigurableApplicationContext, ConfigurableApplicationContext> applicationContextInitializer,
+	Class<?>... annotatedClasses) {
 
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
@@ -73,7 +73,7 @@ public abstract class SpringApplicationContextIntegrationTestsSupport extends In
 	}
 
 	protected @NonNull ConfigurableApplicationContext processBeforeRefresh(
-			@NonNull ConfigurableApplicationContext applicationContext) {
+	@NonNull ConfigurableApplicationContext applicationContext) {
 
 		setApplicationEventPublisher(applicationContext);
 
@@ -88,7 +88,7 @@ public abstract class SpringApplicationContextIntegrationTestsSupport extends In
 
 		if (applicationEventPublisher != null) {
 			TestContextCacheLifecycleListenerAdapter.getInstance()
-				.setApplicationEventPublisher(applicationEventPublisher);
+			.setApplicationEventPublisher(applicationEventPublisher);
 		}
 	}
 

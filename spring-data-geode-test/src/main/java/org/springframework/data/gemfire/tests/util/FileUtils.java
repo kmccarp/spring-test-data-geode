@@ -82,7 +82,7 @@ public abstract class FileUtils extends IOUtils {
 		Assert.notNull(file, "File is required");
 
 		Assert.isTrue(StringUtils.hasText(contents),
-			String.format("The contents for File [%1$s] cannot be null or empty", file));
+		String.format("The contents for File [%1$s] cannot be null or empty", file));
 
 		BufferedWriter fileWriter = null;
 

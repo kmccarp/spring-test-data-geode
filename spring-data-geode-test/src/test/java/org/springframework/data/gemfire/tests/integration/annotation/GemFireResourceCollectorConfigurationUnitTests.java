@@ -51,16 +51,16 @@ public class GemFireResourceCollectorConfigurationUnitTests {
 	public void setImportMetadataParsesConfiguration() {
 
 		Map<String, Object> annotationAttributes = MapBuilder.<String, Object>newMapBuilder()
-			.put("collectOnEvents", new Class[] { AfterTestMethodEvent.class, AfterTestExecutionEvent.class })
-			.put("tryCleanDiskStoreFiles", true)
-			.build();
+		.put("collectOnEvents", new Class[]{AfterTestMethodEvent.class, AfterTestExecutionEvent.class})
+		.put("tryCleanDiskStoreFiles", true)
+		.build();
 
 		AnnotationMetadata mockAnnotationMetadata = mock(AnnotationMetadata.class);
 
 		doReturn(true).when(mockAnnotationMetadata)
-			.hasAnnotation(EnableGemFireResourceCollector.class.getName());
+		.hasAnnotation(EnableGemFireResourceCollector.class.getName());
 		doReturn(annotationAttributes).when(mockAnnotationMetadata)
-			.getAnnotationAttributes(EnableGemFireResourceCollector.class.getName());
+		.getAnnotationAttributes(EnableGemFireResourceCollector.class.getName());
 
 		GemFireResourceCollectorConfiguration configuration = new GemFireResourceCollectorConfiguration();
 
@@ -70,18 +70,18 @@ public class GemFireResourceCollectorConfigurationUnitTests {
 		configuration.setImportMetadata(mockAnnotationMetadata);
 
 		assertThat(configuration.getConfiguredCollectorEventTypes())
-			.containsExactly(AfterTestMethodEvent.class, AfterTestExecutionEvent.class);
+		.containsExactly(AfterTestMethodEvent.class, AfterTestExecutionEvent.class);
 		assertThat(configuration.isTryCleanDiskStoreFiles()).isTrue();
 
 		verify(mockAnnotationMetadata, times(1))
-			.hasAnnotation(eq(EnableGemFireResourceCollector.class.getName()));
+		.hasAnnotation(eq(EnableGemFireResourceCollector.class.getName()));
 		verify(mockAnnotationMetadata, times(1))
-			.getAnnotationAttributes(eq(EnableGemFireResourceCollector.class.getName()));
+		.getAnnotationAttributes(eq(EnableGemFireResourceCollector.class.getName()));
 	}
 
 	@Test
 	public void createsGemFireResourceCollectorApplicationListenerWithDefaultConfiguration()
-			throws NoSuchFieldException {
+	throws NoSuchFieldException {
 
 		GemFireResourceCollectorConfiguration configuration = new GemFireResourceCollectorConfiguration();
 
@@ -89,36 +89,36 @@ public class GemFireResourceCollectorConfigurationUnitTests {
 		assertThat(configuration.isTryCleanDiskStoreFiles()).isFalse();
 
 		GemFireResourceCollectorApplicationListener listener =
-			(GemFireResourceCollectorApplicationListener) configuration.gemfireResourceCollectorApplicationListener();
+		(GemFireResourceCollectorApplicationListener) configuration.gemfireResourceCollectorApplicationListener();
 
 		assertThat(ReflectionUtils.<Set<Class<?>>>getFieldValue(listener, "gemfireResourceCollectorEventTypes"))
-			.containsExactly(AfterTestClassEvent.class);
+		.containsExactly(AfterTestClassEvent.class);
 
 		assertThat(ReflectionUtils.<Boolean>getFieldValue(listener, "tryCleanDiskStoreFilesEnabled"))
-			.isFalse();
+		.isFalse();
 	}
 
 	@Test
 	public void createsGemFireResourceCollectorApplicationListenerWithCustomConfiguration()
-			throws NoSuchFieldException {
+	throws NoSuchFieldException {
 
 		GemFireResourceCollectorConfiguration configuration = spy(new GemFireResourceCollectorConfiguration());
 
-		doReturn(new Class<?>[] { AfterTestMethodEvent.class, AfterTestExecutionEvent.class })
-			.when(configuration).getConfiguredCollectorEventTypes();
+		doReturn(new Class<?>[]{AfterTestMethodEvent.class, AfterTestExecutionEvent.class})
+		.when(configuration).getConfiguredCollectorEventTypes();
 		doReturn(true).when(configuration).isTryCleanDiskStoreFiles();
 
 		assertThat(configuration.getConfiguredCollectorEventTypes())
-			.containsExactly(AfterTestMethodEvent.class, AfterTestExecutionEvent.class);
+		.containsExactly(AfterTestMethodEvent.class, AfterTestExecutionEvent.class);
 		assertThat(configuration.isTryCleanDiskStoreFiles()).isTrue();
 
 		GemFireResourceCollectorApplicationListener listener =
-			(GemFireResourceCollectorApplicationListener) configuration.gemfireResourceCollectorApplicationListener();
+		(GemFireResourceCollectorApplicationListener) configuration.gemfireResourceCollectorApplicationListener();
 
 		assertThat(ReflectionUtils.<Set<Class<?>>>getFieldValue(listener, "gemfireResourceCollectorEventTypes"))
-			.containsExactlyInAnyOrder(AfterTestMethodEvent.class, AfterTestExecutionEvent.class);
+		.containsExactlyInAnyOrder(AfterTestMethodEvent.class, AfterTestExecutionEvent.class);
 
 		assertThat(ReflectionUtils.<Boolean>getFieldValue(listener, "tryCleanDiskStoreFilesEnabled"))
-			.isTrue();
+		.isTrue();
 	}
 }

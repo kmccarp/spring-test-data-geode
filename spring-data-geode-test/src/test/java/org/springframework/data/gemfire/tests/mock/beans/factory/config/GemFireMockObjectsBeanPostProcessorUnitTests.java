@@ -62,17 +62,17 @@ public class GemFireMockObjectsBeanPostProcessorUnitTests {
 
 		assertThat(beanPostProcessor).isNotNull();
 		assertThat(beanPostProcessor.isUsingSingletonCache())
-			.isEqualTo(GemFireMockObjectsBeanPostProcessor.DEFAULT_USE_SINGLETON_CACHE);
+		.isEqualTo(GemFireMockObjectsBeanPostProcessor.DEFAULT_USE_SINGLETON_CACHE);
 
 		Properties gemfireProperties = new PropertiesBuilder()
-			.setProperty("name", "postProcessBeforeInitializationWithGemFirePropertiesTest")
-			.setProperty("log-level", "error")
-			.build();
+		.setProperty("name", "postProcessBeforeInitializationWithGemFirePropertiesTest")
+		.setProperty("log-level", "error")
+		.build();
 
 		assertThat(beanPostProcessor.getGemFireProperties()).isNotSameAs(gemfireProperties);
 
 		assertThat(beanPostProcessor.postProcessBeforeInitialization(gemfireProperties,
-			GemFireMockObjectsBeanPostProcessor.GEMFIRE_PROPERTIES_BEAN_NAME)).isEqualTo(gemfireProperties);
+		GemFireMockObjectsBeanPostProcessor.GEMFIRE_PROPERTIES_BEAN_NAME)).isEqualTo(gemfireProperties);
 
 		assertThat(beanPostProcessor.getGemFireProperties()).isSameAs(gemfireProperties);
 	}
@@ -84,17 +84,17 @@ public class GemFireMockObjectsBeanPostProcessorUnitTests {
 
 		assertThat(beanPostProcessor).isNotNull();
 		assertThat(beanPostProcessor.isUsingSingletonCache())
-			.isEqualTo(GemFireMockObjectsBeanPostProcessor.DEFAULT_USE_SINGLETON_CACHE);
+		.isEqualTo(GemFireMockObjectsBeanPostProcessor.DEFAULT_USE_SINGLETON_CACHE);
 
 		Properties applicationProperties = new PropertiesBuilder()
-			.setProperty("spring.application.name", "postProcessBeforeInitializationWithNonGemFirePropertiesTest")
-			.setProperty("log-level", "error")
-			.build();
+		.setProperty("spring.application.name", "postProcessBeforeInitializationWithNonGemFirePropertiesTest")
+		.setProperty("log-level", "error")
+		.build();
 
 		assertThat(beanPostProcessor.getGemFireProperties()).isNotSameAs(applicationProperties);
 
 		assertThat(beanPostProcessor.postProcessBeforeInitialization(applicationProperties,
-			"applicationProperties")).isEqualTo(applicationProperties);
+		"applicationProperties")).isEqualTo(applicationProperties);
 
 		assertThat(beanPostProcessor.getGemFireProperties()).isNotSameAs(applicationProperties);
 	}
@@ -110,10 +110,10 @@ public class GemFireMockObjectsBeanPostProcessorUnitTests {
 		CacheFactoryBean cacheFactoryBean = spy(new CacheFactoryBean());
 
 		assertThat(beanPostProcessor.postProcessBeforeInitialization(cacheFactoryBean, "peerCache"))
-			.isEqualTo(cacheFactoryBean);
+		.isEqualTo(cacheFactoryBean);
 
 		verify(cacheFactoryBean, times(1))
-			.setCacheFactoryInitializer(isA(GemFireMockObjectsBeanPostProcessor.SpyingCacheFactoryInitializer.class));
+		.setCacheFactoryInitializer(isA(GemFireMockObjectsBeanPostProcessor.SpyingCacheFactoryInitializer.class));
 	}
 
 	@Test
@@ -127,10 +127,10 @@ public class GemFireMockObjectsBeanPostProcessorUnitTests {
 		ClientCacheFactoryBean clientCacheFactoryBean = spy(new ClientCacheFactoryBean());
 
 		assertThat(beanPostProcessor.postProcessBeforeInitialization(clientCacheFactoryBean, "clientCache"))
-			.isEqualTo(clientCacheFactoryBean);
+		.isEqualTo(clientCacheFactoryBean);
 
 		verify(clientCacheFactoryBean, times(1))
-			.setCacheFactoryInitializer(isA(GemFireMockObjectsBeanPostProcessor.SpyingClientCacheFactoryInitializer.class));
+		.setCacheFactoryInitializer(isA(GemFireMockObjectsBeanPostProcessor.SpyingClientCacheFactoryInitializer.class));
 	}
 
 	@Test
@@ -140,15 +140,15 @@ public class GemFireMockObjectsBeanPostProcessorUnitTests {
 
 		assertThat(beanPostProcessor).isNotNull();
 		assertThat(beanPostProcessor.isUsingSingletonCache())
-			.isEqualTo(GemFireMockObjectsBeanPostProcessor.DEFAULT_USE_SINGLETON_CACHE);
+		.isEqualTo(GemFireMockObjectsBeanPostProcessor.DEFAULT_USE_SINGLETON_CACHE);
 
 		PoolFactoryBean poolFactoryBean = spy(new PoolFactoryBean());
 
 		assertThat(beanPostProcessor.postProcessBeforeInitialization(poolFactoryBean, "gemfirePool"))
-			.isEqualTo(poolFactoryBean);
+		.isEqualTo(poolFactoryBean);
 
 		verify(poolFactoryBean, times(1))
-			.setPoolFactoryInitializer(isA(GemFireMockObjectsBeanPostProcessor.MockingPoolFactoryInitializer.class));
+		.setPoolFactoryInitializer(isA(GemFireMockObjectsBeanPostProcessor.MockingPoolFactoryInitializer.class));
 	}
 
 	@Test
@@ -161,7 +161,7 @@ public class GemFireMockObjectsBeanPostProcessorUnitTests {
 		assertThat(beanPostProcessor.postProcessBeforeInitialization(bean, "regularBean")).isEqualTo(bean);
 
 		verify(beanPostProcessor, times(1))
-			.postProcessBeforeInitialization(eq(bean), eq("regularBean"));
+		.postProcessBeforeInitialization(eq(bean), eq("regularBean"));
 		verifyNoMoreInteractions(beanPostProcessor);
 	}
 
@@ -171,9 +171,9 @@ public class GemFireMockObjectsBeanPostProcessorUnitTests {
 		GemFireMockObjectsBeanPostProcessor beanPostProcessor = spy(new GemFireMockObjectsBeanPostProcessor());
 
 		Properties gemfireProperties = new PropertiesBuilder()
-			.setProperty("name", "postProcessAfterInitializationWithGemFireCacheTest")
-			.setProperty("log-level", "error")
-			.build();
+		.setProperty("name", "postProcessAfterInitializationWithGemFireCacheTest")
+		.setProperty("log-level", "error")
+		.build();
 
 		doReturn(gemfireProperties).when(beanPostProcessor).getGemFireProperties();
 
@@ -184,7 +184,7 @@ public class GemFireMockObjectsBeanPostProcessorUnitTests {
 		doReturn(mockDistributedSystem).when(mockCache).getDistributedSystem();
 
 		assertThat(beanPostProcessor.postProcessAfterInitialization(mockCache, "gemfireCache"))
-			.isEqualTo(mockCache);
+		.isEqualTo(mockCache);
 
 		assertThat(mockCache.getDistributedSystem().getProperties()).isSameAs(gemfireProperties);
 
@@ -199,10 +199,10 @@ public class GemFireMockObjectsBeanPostProcessorUnitTests {
 		Object bean = new Object();
 
 		assertThat(beanPostProcessor.postProcessAfterInitialization(bean, "regularBean"))
-			.isEqualTo(bean);
+		.isEqualTo(bean);
 
 		verify(beanPostProcessor, times(1))
-			.postProcessAfterInitialization(eq(bean), eq("regularBean"));
+		.postProcessAfterInitialization(eq(bean), eq("regularBean"));
 		verifyNoMoreInteractions(beanPostProcessor);
 	}
 }

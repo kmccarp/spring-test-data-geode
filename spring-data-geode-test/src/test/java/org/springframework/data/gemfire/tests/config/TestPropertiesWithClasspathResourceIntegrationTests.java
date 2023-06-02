@@ -57,7 +57,7 @@ public class TestPropertiesWithClasspathResourceIntegrationTests {
 	public void getMockTestProperties() {
 
 		assertThat(testProperties)
-			.containsExactlyInAnyOrder("app.testProperty", "gem.mockProperty", "system.gem.testProperty");
+		.containsExactlyInAnyOrder("app.testProperty", "gem.mockProperty", "system.gem.testProperty");
 
 		assertThat(testProperties.get("app.testProperty")).isEqualTo("X");
 		assertThat(testProperties.get("gem.mockProperty")).isEqualTo("Y");
@@ -69,12 +69,12 @@ public class TestPropertiesWithClasspathResourceIntegrationTests {
 
 		try {
 			testProperties.set("myProperty", "TEST") // new
-				.set("app.testProperty", "A") // override
-				.set("app.mockProperty", "B") // new
-				.set("system.gem.testProperty", "YES"); // override
+			.set("app.testProperty", "A") // override
+			.set("app.mockProperty", "B") // new
+			.set("system.gem.testProperty", "YES"); // override
 
 			assertThat(testProperties).containsExactlyInAnyOrder("myProperty",
-				"app.testProperty", "app.mockProperty", "gem.mockProperty", "system.gem.testProperty");
+			"app.testProperty", "app.mockProperty", "gem.mockProperty", "system.gem.testProperty");
 
 			assertThat(testProperties.get("myProperty")).isEqualTo("TEST");
 			assertThat(testProperties.get("app.testProperty")).isEqualTo("A");
@@ -85,7 +85,7 @@ public class TestPropertiesWithClasspathResourceIntegrationTests {
 			testProperties.clear();
 
 			assertThat(testProperties).containsExactlyInAnyOrder("app.testProperty",
-				"gem.mockProperty", "system.gem.testProperty");
+			"gem.mockProperty", "system.gem.testProperty");
 
 			assertThat(testProperties).doesNotContain("myProperty", "app.mockProperty");
 			assertThat(testProperties.get("app.testProperty")).isEqualTo("X");
@@ -102,7 +102,7 @@ public class TestPropertiesWithClasspathResourceIntegrationTests {
 
 		try {
 			assertThat(System.getProperties())
-				.doesNotContainKeys("app.testProperty", "gem.mockProperty", "gem.testProperty");
+			.doesNotContainKeys("app.testProperty", "gem.mockProperty", "gem.testProperty");
 
 			testProperties.configureSystemProperties();
 
@@ -113,12 +113,12 @@ public class TestPropertiesWithClasspathResourceIntegrationTests {
 			testProperties.clearSystemProperties();
 
 			assertThat(System.getProperties())
-				.doesNotContainKeys("app.testProperty", "gem.mockProperty", "gem.testProperty");
+			.doesNotContainKeys("app.testProperty", "gem.mockProperty", "gem.testProperty");
 		}
 		finally {
 			testProperties.forEach(System::clearProperty);
 			assertThat(System.getProperties())
-				.doesNotContainKeys("app.testProperty", "gem.mockProperty", "gem.testProperty");
+			.doesNotContainKeys("app.testProperty", "gem.mockProperty", "gem.testProperty");
 		}
 	}
 }

@@ -73,7 +73,7 @@ public class TestPropertiesIntegrationTests {
 	public void destroySingleTestPropertiesInstance() {
 
 		TestProperties testProperties = TestProperties.getInstance()
-			.set("port", "12345");
+		.set("port", "12345");
 
 		assertThat(testProperties).isNotNull();
 		assertThat(testProperties.get("port")).isEqualTo("12345");
@@ -194,7 +194,7 @@ public class TestPropertiesIntegrationTests {
 	@Test
 	public void getUndefinedPropertyWithDefaultValue() {
 		assertThat(TestProperties.getInstance().get("undefinedProperty", "TEST"))
-			.isEqualTo("TEST");
+		.isEqualTo("TEST");
 	}
 
 	@Test
@@ -279,8 +279,8 @@ public class TestPropertiesIntegrationTests {
 	public void set() {
 
 		TestProperties properties = TestProperties.getInstance()
-			.set("propertyOne", "ONE")
-			.set("propertyTwo", "TWO");
+		.set("propertyOne", "ONE")
+		.set("propertyTwo", "TWO");
 
 		assertThat(properties).isNotNull();
 		assertThat(properties).contains("propertyOne", "propertyTwo");
@@ -366,19 +366,19 @@ public class TestPropertiesIntegrationTests {
 
 		try {
 			TestProperties properties = TestProperties.getInstance()
-				.set("system.propOne", "X")
-				.set("propTwo", "Y")
-				.set("system.propThree", "Z")
-				.set("SYSTEM.propFour", "F");
+			.set("system.propOne", "X")
+			.set("propTwo", "Y")
+			.set("system.propThree", "Z")
+			.set("SYSTEM.propFour", "F");
 
 			assertThat(System.getProperties()).doesNotContainKeys("system.propOne", "propOne", "propTwo",
-				"system.propThree", "propThree", "SYSTEM.propFour", "propFour");
+			"system.propThree", "propThree", "SYSTEM.propFour", "propFour");
 
 			properties.configureSystemProperties();
 
 			assertThat(System.getProperties()).containsKeys("propOne", "propThree");
 			assertThat(System.getProperties())
-				.doesNotContainKeys("system.propOne", "propTwo", "system.propThree", "SYSTEM.propFour", "propFour");
+			.doesNotContainKeys("system.propOne", "propTwo", "system.propThree", "SYSTEM.propFour", "propFour");
 			assertThat(System.getProperty("propOne")).isEqualTo("X");
 			assertThat(System.getProperty("system.propOne")).isNull();
 			assertThat(System.getProperty("propTwo")).isNull();
@@ -390,7 +390,7 @@ public class TestPropertiesIntegrationTests {
 			properties.clearSystemProperties();
 
 			assertThat(System.getProperties()).doesNotContainKeys("system.propOne", "propOne", "propTwo",
-				"system.propThree", "propThree", "SYSTEM.propFour", "propFour");
+			"system.propThree", "propThree", "SYSTEM.propFour", "propFour");
 		}
 		finally {
 			Arrays.asList("propOne", "propThree").forEach(System::clearProperty);

@@ -95,12 +95,12 @@ public class GemFireMockObjectsBeanPostProcessor implements BeanPostProcessor {
 	 */
 	@Override
 	public @Nullable Object postProcessBeforeInitialization(@Nullable Object bean, @NonNull String beanName)
-			throws BeansException {
+	throws BeansException {
 
 		return isGemFireProperties(bean, beanName) ? set((Properties) bean)
-			: isCacheFactoryBean(bean) ? spyOnCacheFactoryBean((CacheFactoryBean) bean, isUsingSingletonCache())
-			: isPoolFactoryBean(bean) ? mockPoolFactoryBean((PoolFactoryBean) bean)
-			: bean;
+		: isCacheFactoryBean(bean) ? spyOnCacheFactoryBean((CacheFactoryBean) bean, isUsingSingletonCache())
+		: isPoolFactoryBean(bean) ? mockPoolFactoryBean((PoolFactoryBean) bean)
+		: bean;
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class GemFireMockObjectsBeanPostProcessor implements BeanPostProcessor {
 	 */
 	@Override
 	public @Nullable Object postProcessAfterInitialization(@Nullable Object bean, @NonNull String beanName)
-			throws BeansException {
+	throws BeansException {
 
 		if (bean instanceof GemFireCache) {
 
@@ -159,8 +159,8 @@ public class GemFireMockObjectsBeanPostProcessor implements BeanPostProcessor {
 	private @NonNull Object spyOnCacheFactoryBean(@NonNull CacheFactoryBean bean, boolean useSingletonCache) {
 
 		return bean instanceof ClientCacheFactoryBean
-			? SpyingClientCacheFactoryInitializer.spyOn((ClientCacheFactoryBean) bean, useSingletonCache)
-			: SpyingCacheFactoryInitializer.spyOn(bean, useSingletonCache);
+		? SpyingClientCacheFactoryInitializer.spyOn((ClientCacheFactoryBean) bean, useSingletonCache)
+		: SpyingCacheFactoryInitializer.spyOn(bean, useSingletonCache);
 	}
 
 	private @NonNull Object mockPoolFactoryBean(@NonNull PoolFactoryBean bean) {
@@ -168,7 +168,7 @@ public class GemFireMockObjectsBeanPostProcessor implements BeanPostProcessor {
 	}
 
 	protected static class SpyingCacheFactoryInitializer
-			implements CacheFactoryBean.CacheFactoryInitializer<CacheFactory> {
+	implements CacheFactoryBean.CacheFactoryInitializer<CacheFactory> {
 
 		protected static CacheFactoryBean spyOn(CacheFactoryBean cacheFactoryBean, boolean useSingletonCache) {
 
@@ -194,13 +194,13 @@ public class GemFireMockObjectsBeanPostProcessor implements BeanPostProcessor {
 	}
 
 	protected static class SpyingClientCacheFactoryInitializer
-			implements CacheFactoryBean.CacheFactoryInitializer<ClientCacheFactory> {
+	implements CacheFactoryBean.CacheFactoryInitializer<ClientCacheFactory> {
 
 		protected static ClientCacheFactoryBean spyOn(ClientCacheFactoryBean clientCacheFactoryBean,
-				boolean useSingletonCache) {
+		boolean useSingletonCache) {
 
 			clientCacheFactoryBean
-				.setCacheFactoryInitializer(new SpyingClientCacheFactoryInitializer(useSingletonCache));
+			.setCacheFactoryInitializer(new SpyingClientCacheFactoryInitializer(useSingletonCache));
 
 			return clientCacheFactoryBean;
 		}

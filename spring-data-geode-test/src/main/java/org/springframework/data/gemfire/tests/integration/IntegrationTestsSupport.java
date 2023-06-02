@@ -129,36 +129,36 @@ public abstract class IntegrationTestsSupport {
 	protected static final String TEST_GEMFIRE_LOG_LEVEL = "error";
 
 	private static final AtomicReference<ConfigurableApplicationContext> applicationContextReference =
-		new AtomicReference<>(null);
+	new AtomicReference<>(null);
 
 	private static final Predicate<String> JAVAX_NET_SSL_NAME_PREDICATE =
-		propertyName -> String.valueOf(propertyName).toLowerCase().startsWith("javax.net.ssl");
+	propertyName -> String.valueOf(propertyName).toLowerCase().startsWith("javax.net.ssl");
 
 	private static final Predicate<String> GEMFIRE_DOT_SYSTEM_PROPERTY_NAME_PREDICATE =
-		propertyName -> String.valueOf(propertyName).toLowerCase().startsWith("gemfire");
+	propertyName -> String.valueOf(propertyName).toLowerCase().startsWith("gemfire");
 
 	private static final Predicate<String> GEODE_DOT_SYSTEM_PROPERTY_NAME_PREDICATE =
-		propertyName -> String.valueOf(propertyName).toLowerCase().startsWith("geode");
+	propertyName -> String.valueOf(propertyName).toLowerCase().startsWith("geode");
 
 	private static final Predicate<String> SPRING_DOT_SYSTEM_PROPERTY_NAME_PREDICATE =
-		propertyName -> String.valueOf(propertyName).toLowerCase().startsWith("spring");
+	propertyName -> String.valueOf(propertyName).toLowerCase().startsWith("spring");
 
 	private static final Predicate<String> ALL_SYSTEM_PROPERTIES_NAME_PREDICATE = JAVAX_NET_SSL_NAME_PREDICATE
-		.or(GEMFIRE_DOT_SYSTEM_PROPERTY_NAME_PREDICATE)
-		.or(GEODE_DOT_SYSTEM_PROPERTY_NAME_PREDICATE)
-		.or(SPRING_DOT_SYSTEM_PROPERTY_NAME_PREDICATE);
+	.or(GEMFIRE_DOT_SYSTEM_PROPERTY_NAME_PREDICATE)
+	.or(GEODE_DOT_SYSTEM_PROPERTY_NAME_PREDICATE)
+	.or(SPRING_DOT_SYSTEM_PROPERTY_NAME_PREDICATE);
 
 	private static final Predicate<String> SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME =
-		StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME::equals;
+	StandardEnvironment.SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME::equals;
 
 	private static final Predicate<String> SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME =
-		StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME::equals;
+	StandardEnvironment.SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME::equals;
 
 	private static final Predicate<String> RETAINED_PROPERTY_SOURCE_NAMES = SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME
-		.or(SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);
+	.or(SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME);
 
 	private static final TestContextCacheLifecycleListenerAdapter cacheLifecycleListener =
-		TestContextCacheLifecycleListenerAdapter.getInstance();
+	TestContextCacheLifecycleListenerAdapter.getInstance();
 
 	@Autowired(required = false)
 	private ConfigurableApplicationContext applicationContext;
@@ -174,7 +174,7 @@ public abstract class IntegrationTestsSupport {
 	 * @see #getApplicationContext()
 	 */
 	protected @Nullable <T extends ConfigurableApplicationContext> T setApplicationContext(
-			@Nullable T applicationContext) {
+	@Nullable T applicationContext) {
 
 		this.applicationContext = applicationContext;
 
@@ -222,7 +222,7 @@ public abstract class IntegrationTestsSupport {
 	 */
 	protected <T extends ConfigurableApplicationContext> T requireApplicationContext() {
 		return this.<T>getOptionalApplicationContext()
-			.orElseThrow(() -> newIllegalStateException("An ApplicationContext was not initialized"));
+		.orElseThrow(() -> newIllegalStateException("An ApplicationContext was not initialized"));
 	}
 
 	/**
@@ -235,8 +235,8 @@ public abstract class IntegrationTestsSupport {
 	public static void clearAllJavaGemFireGeodeAndSpringDotPrefixedSystemProperties() {
 
 		List<String> allSystemPropertyNames = System.getProperties().stringPropertyNames().stream()
-			.filter(ALL_SYSTEM_PROPERTIES_NAME_PREDICATE)
-			.toList();
+		.filter(ALL_SYSTEM_PROPERTIES_NAME_PREDICATE)
+		.toList();
 
 		allSystemPropertyNames.forEach(System::clearProperty);
 	}
@@ -253,22 +253,22 @@ public abstract class IntegrationTestsSupport {
 	public static void clearNonStandardSpringEnvironmentPropertySources() {
 
 		Optional.ofNullable(applicationContextReference.get())
-			.map(ConfigurableApplicationContext::getEnvironment)
-			.map(ConfigurableEnvironment::getPropertySources)
-			.ifPresent(propertySources -> {
-				for (PropertySource<?> propertySource : propertySources) {
-					if (Objects.nonNull(propertySource)) {
+		.map(ConfigurableApplicationContext::getEnvironment)
+		.map(ConfigurableEnvironment::getPropertySources)
+		.ifPresent(propertySources -> {
+			for (PropertySource<?> propertySource : propertySources) {
+				if (Objects.nonNull(propertySource)) {
 
-						String propertySourceName = propertySource.getName();
+					String propertySourceName = propertySource.getName();
 
-						if (StringUtils.hasText(propertySourceName)) {
-							if (!RETAINED_PROPERTY_SOURCE_NAMES.test(propertySource.getName())) {
-								propertySources.remove(propertySourceName);
-							}
+					if (StringUtils.hasText(propertySourceName)) {
+						if (!RETAINED_PROPERTY_SOURCE_NAMES.test(propertySource.getName())) {
+							propertySources.remove(propertySourceName);
 						}
 					}
 				}
-			});
+			}
+		});
 	}
 
 	/**
@@ -331,13 +331,13 @@ public abstract class IntegrationTestsSupport {
 			try {
 
 				Field instance = ReflectionUtils.findField(SSLConfigurationFactory.class, "instance",
-					SSLConfigurationFactory.class);
+				SSLConfigurationFactory.class);
 
 				Optional.ofNullable(instance)
-					.ifPresent(field -> {
-						ReflectionUtils.makeAccessible(field);
-						ReflectionUtils.setField(field, null, null);
-					});
+				.ifPresent(field -> {
+					ReflectionUtils.makeAccessible(field);
+					ReflectionUtils.setField(field, null, null);
+				});
 			}
 			catch (Throwable ignore) {
 				// Not much we can do about it now!
@@ -354,8 +354,8 @@ public abstract class IntegrationTestsSupport {
 	public static void deleteAllGemFireProcessIdFiles() {
 
 		FileFilter fileFilter = file -> file != null
-			&& file.getName().startsWith("vf.gf")
-			&& file.getName().endsWith(".pid");
+		&& file.getName().startsWith("vf.gf")
+		&& file.getName().endsWith(".pid");
 
 		FileSystemUtils.deleteRecursive(FileSystemUtils.WORKING_DIRECTORY, fileFilter);
 	}
@@ -379,8 +379,8 @@ public abstract class IntegrationTestsSupport {
 	public static void unregisterAllDataSerializers() {
 
 		Arrays.stream(ArrayUtils.nullSafeArray(InternalDataSerializer.getSerializers(), DataSerializer.class))
-			.map(DataSerializer::getId)
-			.forEach(InternalDataSerializer::unregister);
+		.map(DataSerializer::getId)
+		.forEach(InternalDataSerializer::unregister);
 	}
 
 	/**
@@ -394,7 +394,7 @@ public abstract class IntegrationTestsSupport {
 	public static void unregisterFunctions() {
 
 		CollectionUtils.nullSafeMap(FunctionService.getRegisteredFunctions())
-			.forEach((functionId, function) -> FunctionService.unregisterFunction(functionId));
+		.forEach((functionId, function) -> FunctionService.unregisterFunction(functionId));
 	}
 
 	/**
@@ -434,9 +434,9 @@ public abstract class IntegrationTestsSupport {
 	public static void closeApplicationContext(@Nullable ApplicationContext applicationContext) {
 
 		Optional.ofNullable(applicationContext)
-			.filter(ConfigurableApplicationContext.class::isInstance)
-			.map(ConfigurableApplicationContext.class::cast)
-			.ifPresent(ConfigurableApplicationContext::close);
+		.filter(ConfigurableApplicationContext.class::isInstance)
+		.map(ConfigurableApplicationContext.class::cast)
+		.ifPresent(ConfigurableApplicationContext::close);
 	}
 
 	public static void closeGemFireCacheWaitOnCacheClosedEvent() {
@@ -452,13 +452,13 @@ public abstract class IntegrationTestsSupport {
 	}
 
 	public static void closeGemFireCacheWaitOnCacheClosedEvent(@NonNull Supplier<GemFireCache> cacheSupplier,
-			@NonNull Function<GemFireCache, GemFireCache> cacheClosingFunction) {
+	@NonNull Function<GemFireCache, GemFireCache> cacheClosingFunction) {
 
 		closeGemFireCacheWaitOnCacheClosedEvent(cacheSupplier, cacheClosingFunction, DEFAULT_WAIT_DURATION);
 	}
 
 	public static void closeGemFireCacheWaitOnCacheClosedEvent(@NonNull Supplier<GemFireCache> cacheSupplier,
-			long duration) {
+	long duration) {
 
 		Function<GemFireCache, GemFireCache> cacheClosingFunction = cacheToClose -> {
 
@@ -477,17 +477,17 @@ public abstract class IntegrationTestsSupport {
 	}
 
 	public static void closeGemFireCacheWaitOnCacheClosedEvent(@NonNull Supplier<GemFireCache> cacheSupplier,
-			@NonNull Function<GemFireCache, GemFireCache> cacheClosingFunction, long duration) {
+	@NonNull Function<GemFireCache, GemFireCache> cacheClosingFunction, long duration) {
 
 		AtomicBoolean closed = new AtomicBoolean(false);
 
 		waitOn(() -> {
 			try {
 				return Optional.ofNullable(cacheSupplier.get())
-					.filter(cache -> !closed.get())
-					.map(cacheClosingFunction)
-					.map(cacheLifecycleListener::isClosed)
-					.orElse(true);
+				.filter(cache -> !closed.get())
+				.map(cacheClosingFunction)
+				.map(cacheLifecycleListener::isClosed)
+				.orElse(true);
 			}
 			catch (CacheClosedException ignore) {
 				closed.set(true);
@@ -507,13 +507,13 @@ public abstract class IntegrationTestsSupport {
 		waitOn(() -> {
 			try {
 				return Optional.ofNullable(Locator.getLocator())
-					.filter(it -> !stopped.get())
-					.map(IntegrationTestsSupport::stop)
-					.map(it -> {
-						stopped.set(!Locator.hasLocator());
-						return stopped.get();
-					})
-					.orElse(true);
+				.filter(it -> !stopped.get())
+				.map(IntegrationTestsSupport::stop)
+				.map(it -> {
+					stopped.set(!Locator.hasLocator());
+					return stopped.get();
+				})
+				.orElse(true);
 			}
 			catch (Exception ignore) {
 				stopped.set(true);
@@ -525,11 +525,11 @@ public abstract class IntegrationTestsSupport {
 	private static @Nullable Locator stop(@Nullable Locator locator) {
 
 		return Optional.ofNullable(locator)
-			.map(it -> {
-				it.stop();
-				return it;
-			})
-			.orElse(locator);
+		.map(it -> {
+			it.stop();
+			return it;
+		})
+		.orElse(locator);
 	}
 
 	protected static @NonNull String asApplicationName(@NonNull Class<?> type) {
@@ -556,7 +556,7 @@ public abstract class IntegrationTestsSupport {
 
 	private static @NonNull String asTimestampedDirectoryName(@NonNull Class<?> type) {
 		return String.format(DIRECTORY_NAME_FORMAT, asQualifiedDirectoryName(type),
-			LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_PATTERN)));
+		LocalDateTime.now().format(DateTimeFormatter.ofPattern(DATE_TIME_PATTERN)));
 	}
 
 	private static @NonNull String asUniqueDirectoryName(@NonNull Class<?> type) {
@@ -570,12 +570,12 @@ public abstract class IntegrationTestsSupport {
 	protected static @NonNull File createDirectory(@NonNull File directory) {
 
 		assertThat(directory)
-			.describedAs("A File reference to the directory to create must not be null")
-			.isNotNull();
+		.describedAs("A File reference to the directory to create must not be null")
+		.isNotNull();
 
 		assertThat(directory.isDirectory() || directory.mkdirs())
-			.describedAs(String.format("Failed to create directory [%s]", directory))
-			.isTrue();
+		.describedAs(String.format("Failed to create directory [%s]", directory))
+		.isTrue();
 
 		if (isDeleteDirectoryOnExit()) {
 			directory.deleteOnExit();
@@ -590,7 +590,7 @@ public abstract class IntegrationTestsSupport {
 
 	protected static boolean isDeleteDirectoryOnExit() {
 		return !System.getProperties().containsKey(DIRECTORY_DELETE_ON_EXIT_PROPERTY)
-			|| Boolean.getBoolean(DIRECTORY_DELETE_ON_EXIT_PROPERTY);
+		|| Boolean.getBoolean(DIRECTORY_DELETE_ON_EXIT_PROPERTY);
 	}
 
 	protected boolean isQueryDebuggingEnabled() {
@@ -643,7 +643,7 @@ public abstract class IntegrationTestsSupport {
 
 	protected static void logSystemProperties() throws IOException {
 		FileUtils.write(new File(SYSTEM_PROPERTIES_LOG_FILE),
-			String.format("%s", CollectionUtils.toString(System.getProperties())));
+		String.format("%s", CollectionUtils.toString(System.getProperties())));
 	}
 
 	protected static boolean waitOn(@NonNull Condition condition) {
@@ -688,7 +688,7 @@ public abstract class IntegrationTestsSupport {
 	}
 
 	protected static abstract class AbstractApplicationEventPublisherCacheLifecycleListenerAdapter
-			implements ApplicationEventPublisherAware, CacheLifecycleListener {
+	implements ApplicationEventPublisherAware, CacheLifecycleListener {
 
 		private ApplicationEventPublisher applicationEventPublisher;
 
@@ -710,7 +710,7 @@ public abstract class IntegrationTestsSupport {
 		@Override
 		public void cacheCreated(InternalCache cache) {
 			getApplicationEventPublisher().ifPresent(eventPublisher ->
-				eventPublisher.publishEvent(new CacheCreatedEvent(cache)));
+			eventPublisher.publishEvent(new CacheCreatedEvent(cache)));
 		}
 
 		/**
@@ -719,19 +719,19 @@ public abstract class IntegrationTestsSupport {
 		@Override
 		public void cacheClosed(InternalCache cache) {
 			getApplicationEventPublisher().ifPresent(eventPublisher ->
-				eventPublisher.publishEvent(new CacheClosedEvent(cache)));
+			eventPublisher.publishEvent(new CacheClosedEvent(cache)));
 		}
 	}
 
 	public static final class TestContextCacheLifecycleListenerAdapter
-			extends AbstractApplicationEventPublisherCacheLifecycleListenerAdapter {
+	extends AbstractApplicationEventPublisherCacheLifecycleListenerAdapter {
 
 		private static final AtomicReference<TestContextCacheLifecycleListenerAdapter> INSTANCE =
-			new AtomicReference<>(null);
+		new AtomicReference<>(null);
 
 		public static TestContextCacheLifecycleListenerAdapter getInstance() {
 			return INSTANCE.updateAndGet(instance -> instance != null ? instance
-				: newTestContextCacheLifecycleListenerAdapter());
+			: newTestContextCacheLifecycleListenerAdapter());
 		}
 
 		private static TestContextCacheLifecycleListenerAdapter newTestContextCacheLifecycleListenerAdapter() {
@@ -745,7 +745,8 @@ public abstract class IntegrationTestsSupport {
 
 		private final Map<GemFireCache, Object> cacheInstances = Collections.synchronizedMap(new WeakHashMap<>());
 
-		private TestContextCacheLifecycleListenerAdapter() { }
+		private TestContextCacheLifecycleListenerAdapter() {
+		}
 
 		public boolean isClosed(@Nullable GemFireCache cache) {
 			return cache == null || (cache.isClosed() && isCacheClosed(cache));

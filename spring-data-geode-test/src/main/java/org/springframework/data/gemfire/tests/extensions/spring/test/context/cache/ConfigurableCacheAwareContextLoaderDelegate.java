@@ -65,7 +65,7 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 	private final AtomicReference<Boolean> springTestContextCacheEnabled = new AtomicReference<>(null);
 
 	private final AtomicReference<MergedContextConfigurationAndApplicationContextPair> applicationContextReference =
-		new AtomicReference<>();
+	new AtomicReference<>();
 
 	/**
 	 * Constructs a new instance of {@link ConfigurableCacheAwareContextLoaderDelegate} initialized with
@@ -73,7 +73,8 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 	 *
 	 * @see org.springframework.test.context.cache.ContextCache
 	 */
-	public ConfigurableCacheAwareContextLoaderDelegate() { }
+	public ConfigurableCacheAwareContextLoaderDelegate() {
+	}
 
 	/**
 	 * Constructs a new instance of {@link ConfigurableCacheAwareContextLoaderDelegate} initialized with
@@ -90,7 +91,7 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 
 	protected boolean isSpringTestContextCacheEnabled() {
 		return springTestContextCacheEnabled.updateAndGet(cacheEnabled -> cacheEnabled != null ? cacheEnabled
-			: getSpringTestContextCacheEnabledResolvingFunction().apply(DEFAULT_SPRING_TEST_CONTEXT_CACHE_ENABLED));
+		: getSpringTestContextCacheEnabledResolvingFunction().apply(DEFAULT_SPRING_TEST_CONTEXT_CACHE_ENABLED));
 	}
 
 	@SuppressWarnings("all")
@@ -101,8 +102,8 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 			String cacheEnabledProperty = SpringProperties.getProperty(SPRING_TEST_CONTEXT_CACHE_ENABLED_PROPERTY);
 
 			boolean resolvedCacheEnabled =
-				(!StringUtils.hasText(cacheEnabledProperty) || Boolean.parseBoolean(cacheEnabledProperty))
-					&& defaultCacheEnabled;
+			(!StringUtils.hasText(cacheEnabledProperty) || Boolean.parseBoolean(cacheEnabledProperty))
+		&& defaultCacheEnabled;
 
 			return resolvedCacheEnabled;
 		};
@@ -111,8 +112,8 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 	protected boolean isApplicationContextActive() {
 
 		return Optional.ofNullable(applicationContextReference.get())
-			.filter(MergedContextConfigurationAndApplicationContextPair::isActive)
-			.isPresent();
+		.filter(MergedContextConfigurationAndApplicationContextPair::isActive)
+		.isPresent();
 	}
 
 	/**
@@ -123,7 +124,7 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 	public boolean isContextLoaded(@NonNull MergedContextConfiguration mergedContextConfiguration) {
 
 		boolean contextLoaded = (isSpringTestContextCacheEnabled() && super.isContextLoaded(mergedContextConfiguration))
-			|| isApplicationContextActive();
+		|| isApplicationContextActive();
 
 		return contextLoaded;
 	}
@@ -135,31 +136,31 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 	public @NonNull ApplicationContext loadContext(@NonNull MergedContextConfiguration mergedContextConfiguration) {
 
 		return isSpringTestContextCacheEnabled()
-			? super.loadContext(mergedContextConfiguration)
-			: loadContext(mergedContextConfiguration, this::loadContextInternalWithExceptionHandling);
+		? super.loadContext(mergedContextConfiguration)
+		: loadContext(mergedContextConfiguration, this::loadContextInternalWithExceptionHandling);
 	}
 
 	private @NonNull ApplicationContext loadContext(@NonNull MergedContextConfiguration mergedContextConfiguration,
-			@NonNull Function<MergedContextConfiguration, ApplicationContext> contextLoaderFunction) {
+	@NonNull Function<MergedContextConfiguration, ApplicationContext> contextLoaderFunction) {
 
 		MergedContextConfigurationAndApplicationContextPair pair = this.applicationContextReference
-			.updateAndGet(ref -> ref != null
-				? ref.update(mergedContextConfiguration, contextLoaderFunction)
-				: MergedContextConfigurationAndApplicationContextPair
-					.from(mergedContextConfiguration, contextLoaderFunction.apply(mergedContextConfiguration)));
+		.updateAndGet(ref -> ref != null
+	? ref.update(mergedContextConfiguration, contextLoaderFunction)
+	: MergedContextConfigurationAndApplicationContextPair
+	.from(mergedContextConfiguration, contextLoaderFunction.apply(mergedContextConfiguration)));
 
 		return pair.getApplicationContext();
 	}
 
 	private @NonNull ApplicationContext loadContextInternalWithExceptionHandling(
-			@NonNull MergedContextConfiguration mergedContextConfiguration) {
+	@NonNull MergedContextConfiguration mergedContextConfiguration) {
 
 		try {
 			return loadContextInternal(mergedContextConfiguration);
 		}
 		catch (Exception cause) {
 			throw newIllegalStateException(cause, "Failed to load ApplicationContext for context configuration [%s]",
-				mergedContextConfiguration);
+			mergedContextConfiguration);
 		}
 	}
 
@@ -168,7 +169,7 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 	 */
 	@Override
 	public void closeContext(@NonNull MergedContextConfiguration mergedContextConfiguration,
-			DirtiesContext.HierarchyMode hierarchyMode) {
+	DirtiesContext.HierarchyMode hierarchyMode) {
 
 		if (isSpringTestContextCacheEnabled()) {
 			super.closeContext(mergedContextConfiguration, hierarchyMode);
@@ -181,14 +182,14 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 	private boolean closeApplicationContext(@NonNull MergedContextConfiguration contextConfiguration) {
 
 		return Optional.ofNullable(applicationContextReference.get())
-			.map(pair -> pair.closeApplicationContextIfMatch(contextConfiguration))
-			.orElse(false);
+		.map(pair -> pair.closeApplicationContextIfMatch(contextConfiguration))
+		.orElse(false);
 	}
 
 	protected static class MergedContextConfigurationAndApplicationContextPair {
 
 		protected static @NonNull MergedContextConfigurationAndApplicationContextPair from(
-				@NonNull MergedContextConfiguration contextConfiguration, @NonNull ApplicationContext applicationContext) {
+		@NonNull MergedContextConfiguration contextConfiguration, @NonNull ApplicationContext applicationContext) {
 
 			return new MergedContextConfigurationAndApplicationContextPair(contextConfiguration, applicationContext);
 		}
@@ -198,8 +199,8 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 		private final MergedContextConfiguration mergedContextConfiguration;
 
 		protected MergedContextConfigurationAndApplicationContextPair(
-			@NonNull MergedContextConfiguration mergedContextConfiguration,
-			@NonNull ApplicationContext applicationContext) {
+		@NonNull MergedContextConfiguration mergedContextConfiguration,
+		@NonNull ApplicationContext applicationContext) {
 
 			Assert.notNull(mergedContextConfiguration, "MergedContextConfiguration must not be null");
 			Assert.notNull(applicationContext, "ApplicationContext must not be null");
@@ -219,8 +220,8 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 		protected boolean isActive() {
 
 			return Optional.ofNullable(getApplicationContext())
-				.filter(SpringUtils::isApplicationContextActive)
-				.isPresent();
+			.filter(SpringUtils::isApplicationContextActive)
+			.isPresent();
 		}
 
 		protected boolean isMatch(@Nullable MergedContextConfiguration mergedContextConfiguration) {
@@ -234,31 +235,31 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 		protected boolean isUpdatable(@Nullable MergedContextConfiguration mergedContextConfiguration) {
 
 			return Objects.nonNull(mergedContextConfiguration)
-				&& closeApplicationContextIfNotMatch(mergedContextConfiguration)
-				&& !isActive();
+			&& closeApplicationContextIfNotMatch(mergedContextConfiguration)
+			&& !isActive();
 		}
 
 		protected boolean closeApplicationContextIfMatch(
-				@Nullable MergedContextConfiguration mergedContextConfiguration) {
+		@Nullable MergedContextConfiguration mergedContextConfiguration) {
 
 			return isMatch(mergedContextConfiguration)
-				&& SpringUtils.closeApplicationContext(getApplicationContext());
+			&& SpringUtils.closeApplicationContext(getApplicationContext());
 		}
 
 		protected boolean closeApplicationContextIfNotMatch(
-				@Nullable MergedContextConfiguration mergedContextConfiguration) {
+		@Nullable MergedContextConfiguration mergedContextConfiguration) {
 
 			return isNotMatch(mergedContextConfiguration)
-				&& SpringUtils.closeApplicationContext(getApplicationContext());
+			&& SpringUtils.closeApplicationContext(getApplicationContext());
 		}
 
 		protected @NonNull MergedContextConfigurationAndApplicationContextPair update(
-				@Nullable MergedContextConfiguration mergedContextConfiguration,
-				@NonNull Function<MergedContextConfiguration, ApplicationContext> contextLoaderFunction) {
+		@Nullable MergedContextConfiguration mergedContextConfiguration,
+		@NonNull Function<MergedContextConfiguration, ApplicationContext> contextLoaderFunction) {
 
 			return isUpdatable(mergedContextConfiguration)
-				? from(mergedContextConfiguration, contextLoaderFunction.apply(mergedContextConfiguration))
-				: this;
+			? from(mergedContextConfiguration, contextLoaderFunction.apply(mergedContextConfiguration))
+			: this;
 		}
 
 		/**
@@ -276,10 +277,10 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 			}
 
 			MergedContextConfigurationAndApplicationContextPair that =
-				(MergedContextConfigurationAndApplicationContextPair) obj;
+			(MergedContextConfigurationAndApplicationContextPair) obj;
 
 			return ObjectUtils.nullSafeEquals(this.getMergedContextConfiguration(), that.getMergedContextConfiguration())
-				&& ObjectUtils.nullSafeEquals(this.getApplicationContext(), that.getApplicationContext());
+			&& ObjectUtils.nullSafeEquals(this.getApplicationContext(), that.getApplicationContext());
 		}
 
 		/**
@@ -302,7 +303,7 @@ public class ConfigurableCacheAwareContextLoaderDelegate extends DefaultCacheAwa
 		@Override
 		public String toString() {
 			return String.format("MergedContextConfiguration [%1$s] for ApplicationContext [%2$s]",
-				getMergedContextConfiguration(), getApplicationContext());
+			getMergedContextConfiguration(), getApplicationContext());
 		}
 	}
 }

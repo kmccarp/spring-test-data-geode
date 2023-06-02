@@ -39,9 +39,9 @@ import org.apache.geode.cache.query.IndexType;
 @SuppressWarnings("unused")
 public abstract class IndexMockObjects extends MockObjectsSupport {
 
-	@SuppressWarnings({ "deprecation", "unchecked" })
+	@SuppressWarnings({"deprecation", "unchecked"})
 	public static Index mockIndex(String name, String fromClause, String indexedExpression, String projectionAttributes,
-			Region region, IndexStatistics statistics, IndexType type) {
+	Region region, IndexStatistics statistics, IndexType type) {
 
 		Index mockIndex = mock(Index.class, withSettings().name(name).lenient());
 
@@ -60,8 +60,8 @@ public abstract class IndexMockObjects extends MockObjectsSupport {
 	}
 
 	public static IndexStatistics mockIndexStatistics(int numberOfBucketIndexes, long numberOfKeys,
-			long numberOfMapIndexKeys, long numberOfValues, long numberOfUpdates, int readLockCount,
-			long totalUpdateTime, long totalUses) {
+	long numberOfMapIndexKeys, long numberOfValues, long numberOfUpdates, int readLockCount,
+	long totalUpdateTime, long totalUses) {
 
 		IndexStatistics mockIndexStatistics = mock(IndexStatistics.class, withSettings().lenient());
 

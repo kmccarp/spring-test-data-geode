@@ -59,7 +59,7 @@ public class SpringApplicationTerminatingIntegrationTests extends ForkingClientS
 	public static void startSpringApplication() throws IOException {
 
 		springApplicationProcess = run(TestSpringApplicationConfiguration.class,
-			"-Dspring.profiles.active=SpringApplicationTerminator");
+		"-Dspring.profiles.active=SpringApplicationTerminator");
 
 		startTime = Instant.now();
 	}

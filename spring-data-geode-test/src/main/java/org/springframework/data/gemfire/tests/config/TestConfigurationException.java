@@ -28,7 +28,8 @@ import org.springframework.data.gemfire.tests.TestException;
 @SuppressWarnings("unused")
 public class TestConfigurationException extends TestException {
 
-	public TestConfigurationException() { }
+	public TestConfigurationException() {
+	}
 
 	public TestConfigurationException(String message) {
 		super(message);

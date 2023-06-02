@@ -88,14 +88,14 @@ public abstract class FileSystemUtils extends FileUtils {
 	public static boolean isEmpty(@Nullable File path) {
 
 		return isDirectory(path)
-			? ArrayUtils.isEmpty(path.listFiles())
-			: nullSafeLength(path) == 0;
+		? ArrayUtils.isEmpty(path.listFiles())
+		: nullSafeLength(path) == 0;
 	}
 
 	public static @NonNull File[] listFiles(@NonNull File directory, @NonNull FileFilter fileFilter) {
 
 		Assert.isTrue(isDirectory(directory),
-			String.format("File [%s] does not refer to a valid directory", directory));
+		String.format("File [%s] does not refer to a valid directory", directory));
 
 		List<File> results = new ArrayList<>();
 
@@ -122,8 +122,8 @@ public abstract class FileSystemUtils extends FileUtils {
 		File[] files = isDirectory(directory) ? directory.listFiles(resolvedFileFilter) : null;
 
 		return files != null
-			? files
-			: NO_FILES;
+		? files
+		: NO_FILES;
 	}
 
 	public static class AllFilesFilter implements FileFilter {
@@ -151,7 +151,7 @@ public abstract class FileSystemUtils extends FileUtils {
 
 		protected static FileFilter compose(FileFilter fileFilterOne, LogicalOperator operator, FileFilter fileFilterTwo) {
 			return (fileFilterOne == null ? fileFilterTwo : (fileFilterTwo == null ? fileFilterOne
-				: new CompositeFileFilter(fileFilterOne, operator, fileFilterTwo)));
+			: new CompositeFileFilter(fileFilterOne, operator, fileFilterTwo)));
 		}
 
 		public static FileFilter and(FileFilter... fileFilters) {
@@ -192,7 +192,7 @@ public abstract class FileSystemUtils extends FileUtils {
 					return (fileFilterOne.accept(pathname) || fileFilterTwo.accept(pathname));
 				default:
 					throw new UnsupportedOperationException(String.format(
-						"Logical operator [%s] is unsupported", this.logicalOperator));
+					"Logical operator [%s] is unsupported", this.logicalOperator));
 			}
 		}
 

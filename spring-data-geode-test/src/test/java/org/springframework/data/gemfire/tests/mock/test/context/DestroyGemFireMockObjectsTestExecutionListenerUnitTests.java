@@ -117,7 +117,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void beforeTestClassIsDisabledByDefault() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		assertThat(listener.isDestroyOnEventTypeEnabled(TestContextEventType.BEFORE_TEST_CLASS)).isFalse();
 
@@ -130,7 +130,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void beforeTestClassDestroysGemFireMockObjectsWhenEnabled() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		doNothing().when(listener).destroyGemFireMockObjects();
 
@@ -146,7 +146,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void prepareTestInstanceIsDisabledByDefault() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		assertThat(listener.isDestroyOnEventTypeEnabled(TestContextEventType.PREPARE_TEST_INSTANCE)).isFalse();
 
@@ -159,7 +159,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void prepareTestInstanceDestroysGemFireMockObjectsWhenEnabled() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		doNothing().when(listener).destroyGemFireMockObjects();
 
@@ -175,7 +175,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void beforeTestMethodIsDisabledByDefault() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		assertThat(listener.isDestroyOnEventTypeEnabled(TestContextEventType.BEFORE_TEST_METHOD)).isFalse();
 
@@ -188,7 +188,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void beforeTestMethodDestroysGemFireMockObjectsWhenEnabled() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		doNothing().when(listener).destroyGemFireMockObjects();
 
@@ -204,7 +204,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void beforeTestExecutionIsDisabledByDefault() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		assertThat(listener.isDestroyOnEventTypeEnabled(TestContextEventType.BEFORE_TEST_EXECUTION)).isFalse();
 
@@ -217,7 +217,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void beforeTestExecutionDestroysGemFireMockObjectsWhenEnabled() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		doNothing().when(listener).destroyGemFireMockObjects();
 
@@ -233,7 +233,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void afterTestExecutionIsDisabledByDefault() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		assertThat(listener.isDestroyOnEventTypeEnabled(TestContextEventType.AFTER_TEST_EXECUTION)).isFalse();
 
@@ -246,7 +246,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void afterTestExecutionDestroysGemFireMockObjectsWhenEnabled() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		doNothing().when(listener).destroyGemFireMockObjects();
 
@@ -262,7 +262,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void afterTestMethodIsDisabledByDefault() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		assertThat(listener.isDestroyOnEventTypeEnabled(TestContextEventType.AFTER_TEST_METHOD)).isFalse();
 
@@ -275,7 +275,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void afterTestMethodDestroysGemFireMockObjectsWhenEnabled() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		doNothing().when(listener).destroyGemFireMockObjects();
 
@@ -291,7 +291,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void afterTestClassIsEnabledByDefault() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		doNothing().when(listener).destroyGemFireMockObjects();
 
@@ -306,7 +306,7 @@ public class DestroyGemFireMockObjectsTestExecutionListenerUnitTests {
 	public void afterTestClassWillNotDestroyGemFireMockObjectsWhenDisabled() {
 
 		DestroyGemFireMockObjectsTestExecutionListener listener =
-			spy(new DestroyGemFireMockObjectsTestExecutionListener());
+		spy(new DestroyGemFireMockObjectsTestExecutionListener());
 
 		assertThat(listener.disableDestroyOnEventType(TestContextEventType.AFTER_TEST_CLASS)).isTrue();
 		assertThat(listener.isDestroyOnEventTypeEnabled(TestContextEventType.AFTER_TEST_CLASS)).isFalse();

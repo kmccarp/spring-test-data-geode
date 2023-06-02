@@ -66,7 +66,7 @@ import org.slf4j.LoggerFactory;
  * @since 0.0.17
  */
 public class GemFireResourceCollectorApplicationListener
-		implements ApplicationContextAware, ApplicationListener<ApplicationEvent> {
+implements ApplicationContextAware, ApplicationListener<ApplicationEvent> {
 
 	protected static final int DEFAULT_DELETE_ATTEMPTS = 2;
 
@@ -89,10 +89,10 @@ public class GemFireResourceCollectorApplicationListener
 	 */
 	@SuppressWarnings("unchecked")
 	public static GemFireResourceCollectorApplicationListener create(
-			@Nullable Class<? extends ApplicationEvent>... gemfireResourceCollectorEventTypes) {
+	@Nullable Class<? extends ApplicationEvent>... gemfireResourceCollectorEventTypes) {
 
 		return create(DEFAULT_SEARCH_DIRECTORY,
-			Arrays.asList(ArrayUtils.nullSafeArray(gemfireResourceCollectorEventTypes, Class.class)));
+		Arrays.asList(ArrayUtils.nullSafeArray(gemfireResourceCollectorEventTypes, Class.class)));
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class GemFireResourceCollectorApplicationListener
 	 */
 	@SuppressWarnings("unchecked")
 	public static GemFireResourceCollectorApplicationListener create(@Nullable File searchDirectory,
-			@Nullable Class<? extends ApplicationEvent>... gemfireResourceCollectorEventTypes) {
+	@Nullable Class<? extends ApplicationEvent>... gemfireResourceCollectorEventTypes) {
 
 		return create(searchDirectory, Arrays.asList(ArrayUtils.nullSafeArray(gemfireResourceCollectorEventTypes, Class.class)));
 	}
@@ -133,7 +133,7 @@ public class GemFireResourceCollectorApplicationListener
 	 * @see java.lang.Iterable
 	 */
 	public static GemFireResourceCollectorApplicationListener create(
-			@Nullable Iterable<Class<? extends ApplicationEvent>> gemfireResourceCollectorEventTypes) {
+	@Nullable Iterable<Class<? extends ApplicationEvent>> gemfireResourceCollectorEventTypes) {
 
 		return new GemFireResourceCollectorApplicationListener(gemfireResourceCollectorEventTypes);
 	}
@@ -155,7 +155,7 @@ public class GemFireResourceCollectorApplicationListener
 	 * @see java.io.File
 	 */
 	public static GemFireResourceCollectorApplicationListener create(File searchDirectory,
-			@Nullable Iterable<Class<? extends ApplicationEvent>> gemfireResourceCollectorEventTypes) {
+	@Nullable Iterable<Class<? extends ApplicationEvent>> gemfireResourceCollectorEventTypes) {
 
 		return new GemFireResourceCollectorApplicationListener(searchDirectory, gemfireResourceCollectorEventTypes);
 	}
@@ -183,7 +183,7 @@ public class GemFireResourceCollectorApplicationListener
 	 * @see java.lang.Iterable
 	 */
 	public GemFireResourceCollectorApplicationListener(
-			@Nullable Iterable<Class<? extends ApplicationEvent>> gemfireResourceCollectorEventTypes) {
+	@Nullable Iterable<Class<? extends ApplicationEvent>> gemfireResourceCollectorEventTypes) {
 
 		this(DEFAULT_SEARCH_DIRECTORY, gemfireResourceCollectorEventTypes);
 	}
@@ -201,18 +201,18 @@ public class GemFireResourceCollectorApplicationListener
 	 * @see java.lang.Iterable
 	 */
 	public GemFireResourceCollectorApplicationListener(@Nullable File searchDirectory,
-			@Nullable Iterable<Class<? extends ApplicationEvent>> gemfireResourceCollectorEventTypes) {
+	@Nullable Iterable<Class<? extends ApplicationEvent>> gemfireResourceCollectorEventTypes) {
 
 		this.searchDirectory = searchDirectory != null ? searchDirectory : DEFAULT_SEARCH_DIRECTORY;
 
 		Set<Class<? extends ApplicationEvent>> resolvedGemFireResourceCollectorEventTypes =
-			StreamSupport.stream(CollectionUtils.nullSafeIterable(gemfireResourceCollectorEventTypes).spliterator(), false)
-				.filter(Objects::nonNull)
-				.collect(Collectors.toSet());
+		StreamSupport.stream(CollectionUtils.nullSafeIterable(gemfireResourceCollectorEventTypes).spliterator(), false)
+	.filter(Objects::nonNull)
+	.collect(Collectors.toSet());
 
 		resolvedGemFireResourceCollectorEventTypes = !resolvedGemFireResourceCollectorEventTypes.isEmpty()
-			? resolvedGemFireResourceCollectorEventTypes
-			: Collections.singleton(AfterTestClassEvent.class);
+		? resolvedGemFireResourceCollectorEventTypes
+		: Collections.singleton(AfterTestClassEvent.class);
 
 		this.gemfireResourceCollectorEventTypes = Collections.unmodifiableSet(resolvedGemFireResourceCollectorEventTypes);
 	}
@@ -345,7 +345,7 @@ public class GemFireResourceCollectorApplicationListener
 	protected void collectGemFireResources(@NonNull File directory) {
 
 		Assert.isTrue(FileSystemUtils.isDirectory(directory),
-			() -> String.format("File [%s] must be a directory", directory));
+		() -> String.format("File [%s] must be a directory", directory));
 
 		for (File file : FileSystemUtils.safeListFiles(directory, GemFireResourceFileFilter.INSTANCE)) {
 			if (FileSystemUtils.isDirectory(file)) {
@@ -370,20 +370,20 @@ public class GemFireResourceCollectorApplicationListener
 	protected void collectGemFireDiskStoreFiles() {
 
 		getApplicationContext()
-			.map(it -> it.getBeansOfType(DiskStore.class))
-			.map(Map::values)
-			.ifPresent(diskStores -> diskStores.stream()
-				.filter(Objects::nonNull)
-				.forEach(diskStore -> {
-					for (File directory : ArrayUtils.nullSafeArray(diskStore.getDiskDirs(), File.class)) {
-						try {
-							FileSystemUtils.deleteRecursive(directory);
-						}
-						catch (Throwable ignore) {
-							getLogger().warn("Unable to delete DiskStore directory [{}]", directory);
-						}
-					}
-				}));
+		.map(it -> it.getBeansOfType(DiskStore.class))
+		.map(Map::values)
+		.ifPresent(diskStores -> diskStores.stream()
+	.filter(Objects::nonNull)
+	.forEach(diskStore -> {
+		for (File directory : ArrayUtils.nullSafeArray(diskStore.getDiskDirs(), File.class)) {
+			try {
+				FileSystemUtils.deleteRecursive(directory);
+			}
+			catch (Throwable ignore) {
+				getLogger().warn("Unable to delete DiskStore directory [{}]", directory);
+			}
+		}
+	}));
 	}
 
 	/**
@@ -446,35 +446,35 @@ public class GemFireResourceCollectorApplicationListener
 
 		// https://gemfire.docs.pivotal.io/910/geode/managing/disk_storage/file_names_and_extensions.html
 		private static final FileFilter GEMFIRE_FILE_EXTENSION_FILTER = FileSystemUtils.CompositeFileFilter.or(
-			new FileSystemUtils.FileExtensionFilter(".dat"),
-			new FileSystemUtils.FileExtensionFilter(".gfs"),
-			new FileSystemUtils.FileExtensionFilter(".crf"),
-			new FileSystemUtils.FileExtensionFilter(".drf"),
-			new FileSystemUtils.FileExtensionFilter(".if"),
-			new FileSystemUtils.FileExtensionFilter(".krf"),
-			new FileSystemUtils.FileExtensionFilter(".lk"),
-			new FileSystemUtils.FileExtensionFilter(".log"),
-			new FileSystemUtils.FileExtensionFilter(".pid"),
-			new FileSystemUtils.FileExtensionFilter(".properties"),
-			new FileSystemUtils.FileExtensionFilter(".xml")
+		new FileSystemUtils.FileExtensionFilter(".dat"),
+		new FileSystemUtils.FileExtensionFilter(".gfs"),
+		new FileSystemUtils.FileExtensionFilter(".crf"),
+		new FileSystemUtils.FileExtensionFilter(".drf"),
+		new FileSystemUtils.FileExtensionFilter(".if"),
+		new FileSystemUtils.FileExtensionFilter(".krf"),
+		new FileSystemUtils.FileExtensionFilter(".lk"),
+		new FileSystemUtils.FileExtensionFilter(".log"),
+		new FileSystemUtils.FileExtensionFilter(".pid"),
+		new FileSystemUtils.FileExtensionFilter(".properties"),
+		new FileSystemUtils.FileExtensionFilter(".xml")
 		);
 
 		private static final Set<String> GEMFIRE_FILE_NAMES =
-			Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-				"backup",
-				"cache",
-				"configdiskdir",
-				"default",
-				"drlk_if",
-				"gfsecurity",
-				"gemfire",
-				"geode",
-				"locator",
-				"overflow"
-			)));
+		Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+	"backup",
+	"cache",
+	"configdiskdir",
+	"default",
+	"drlk_if",
+	"gfsecurity",
+	"gemfire",
+	"geode",
+	"locator",
+	"overflow"
+		)));
 
 		private static final Predicate<File> GEMFIRE_FILE_NAME_FILTER = file ->
-			Objects.nonNull(file) && GEMFIRE_FILE_NAMES.stream().anyMatch(file.getName().toLowerCase()::startsWith);
+		Objects.nonNull(file) && GEMFIRE_FILE_NAMES.stream().anyMatch(file.getName().toLowerCase()::startsWith);
 
 		protected FileFilter getDirectoryFileFilter() {
 			return DIRECTORY_FILE_FILTER;

@@ -63,7 +63,7 @@ public class MockPeerCacheApplicationXmlConfigurationIntegrationTests extends In
 
 		assertThat(this.cache).isNotNull();
 		assertThat(this.cache.getName())
-			.isEqualTo(MockPeerCacheApplicationXmlConfigurationIntegrationTests.class.getSimpleName());
+		.isEqualTo(MockPeerCacheApplicationXmlConfigurationIntegrationTests.class.getSimpleName());
 		assertThat(this.example).isNotNull();
 		assertThat(this.example.getName()).isEqualTo("Example");
 		assertThat(this.cache.getRegion(this.example.getFullPath())).isEqualTo(this.example);

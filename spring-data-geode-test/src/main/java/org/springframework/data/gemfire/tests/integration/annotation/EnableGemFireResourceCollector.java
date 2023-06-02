@@ -61,7 +61,7 @@ public @interface EnableGemFireResourceCollector {
 	 * @see org.springframework.context.ApplicationEvent
 	 * @see java.lang.Class
 	 */
-	Class<? extends ApplicationEvent>[] collectOnEvents() default { AfterTestClassEvent.class };
+	Class<? extends ApplicationEvent>[] collectOnEvents() default {AfterTestClassEvent.class};
 
 	/**
 	 * Tries to cleanup all the {@link File Files} left behind by GemFire/Geode {@link DiskStore DiskStores}.

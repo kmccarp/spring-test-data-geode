@@ -37,17 +37,17 @@ public class ByteArrayComparator implements Comparator<byte[]> {
 
 		// Cannot use subtraction; Must be careful of overflow/underflow.
 		return bytesOneLength < bytesTwoLength ? -1
-			: bytesOneLength > bytesTwoLength ? 1
-			: compareByteByByte(bytesOne, bytesTwo);
+		: bytesOneLength > bytesTwoLength ? 1
+		: compareByteByByte(bytesOne, bytesTwo);
 	}
 
 	private int compareByteByByte(byte[] bytesOne, byte[] bytesTwo) {
 
 		String errorMessage =
-			"The length of the byte arrays do no match; byte array 1 is [%d] and byte array 2 is [%d]";
+		"The length of the byte arrays do no match; byte array 1 is [%d] and byte array 2 is [%d]";
 
 		Assert.isTrue(bytesOne.length == bytesTwo.length,
-			String.format(errorMessage, bytesOne.length, bytesTwo.length));
+		String.format(errorMessage, bytesOne.length, bytesTwo.length));
 
 		for (int index = 0; index < bytesOne.length; index++) {
 

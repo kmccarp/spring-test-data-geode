@@ -62,27 +62,27 @@ public class GemFireMockObjectsConfigurationUnitTests {
 		Map<String, Object> enableGemFireMockObjectsAttributes = new HashMap<>();
 
 		enableGemFireMockObjectsAttributes.put("destroyOnEvents",
-			new Class[] { ContextClosedEvent.class, ContextRefreshedEvent.class });
+		new Class[]{ContextClosedEvent.class, ContextRefreshedEvent.class});
 		enableGemFireMockObjectsAttributes.put("useSingletonCache", true);
 
 		AnnotationMetadata mockAnnotationMetadata = mock(AnnotationMetadata.class);
 
 		doReturn(true).when(mockAnnotationMetadata)
-			.hasAnnotation(eq(EnableGemFireMockObjects.class.getName()));
+		.hasAnnotation(eq(EnableGemFireMockObjects.class.getName()));
 
 		doReturn(enableGemFireMockObjectsAttributes).when(mockAnnotationMetadata)
-			.getAnnotationAttributes(eq(EnableGemFireMockObjects.class.getName()));
+		.getAnnotationAttributes(eq(EnableGemFireMockObjects.class.getName()));
 
 		configuration.setImportMetadata(mockAnnotationMetadata);
 
 		assertThat(configuration.getConfiguredDestroyEventTypes())
-			.containsExactly(ContextClosedEvent.class, ContextRefreshedEvent.class);
+		.containsExactly(ContextClosedEvent.class, ContextRefreshedEvent.class);
 		assertThat(configuration.isUseSingletonCacheConfigured()).isTrue();
 
 		verify(mockAnnotationMetadata, times(1))
-			.hasAnnotation(eq(EnableGemFireMockObjects.class.getName()));
+		.hasAnnotation(eq(EnableGemFireMockObjects.class.getName()));
 		verify(mockAnnotationMetadata, times(1))
-			.getAnnotationAttributes(eq(EnableGemFireMockObjects.class.getName()));
+		.getAnnotationAttributes(eq(EnableGemFireMockObjects.class.getName()));
 	}
 
 	@Test
@@ -93,7 +93,7 @@ public class GemFireMockObjectsConfigurationUnitTests {
 		doReturn(true).when(configuration).isUseSingletonCacheConfigured();
 
 		GemFireMockObjectsBeanPostProcessor beanPostProcessor =
-			(GemFireMockObjectsBeanPostProcessor) configuration.gemfireMockObjectsBeanPostProcessor();
+		(GemFireMockObjectsBeanPostProcessor) configuration.gemfireMockObjectsBeanPostProcessor();
 
 		assertThat(beanPostProcessor).isNotNull();
 		assertThat(ReflectionUtils.<Boolean>getFieldValue(beanPostProcessor, "useSingletonCache")).isTrue();
@@ -108,16 +108,16 @@ public class GemFireMockObjectsConfigurationUnitTests {
 		GemFireMockObjectsConfiguration configuration = spy(new GemFireMockObjectsConfiguration());
 
 		Class<? extends ApplicationEvent>[] destroyEventTypes =
-			new Class[] { ContextRefreshedEvent.class, ContextClosedEvent.class };
+		new Class[]{ContextRefreshedEvent.class, ContextClosedEvent.class};
 
 		doReturn(destroyEventTypes).when(configuration).getConfiguredDestroyEventTypes();
 
 		DestroyGemFireMockObjectsApplicationListener applicationListener =
-			(DestroyGemFireMockObjectsApplicationListener) configuration.destroyGemFireMockObjectsApplicationListener();
+		(DestroyGemFireMockObjectsApplicationListener) configuration.destroyGemFireMockObjectsApplicationListener();
 
 		assertThat(applicationListener).isNotNull();
 		assertThat(ReflectionUtils.<Set<Class<? extends ApplicationEvent>>>getFieldValue(applicationListener, "configuredDestroyEventTypes"))
-			.containsExactlyInAnyOrder(destroyEventTypes);
+		.containsExactlyInAnyOrder(destroyEventTypes);
 
 		verify(configuration, times(1)).getConfiguredDestroyEventTypes();
 	}

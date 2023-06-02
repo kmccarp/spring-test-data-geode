@@ -59,7 +59,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SpringEnvironmentPropertySourcesCleanupIntegrationTests extends IntegrationTestsSupport {
 
 	private static final AtomicReference<ConfigurableApplicationContext> applicationContextReference =
-		new AtomicReference<>(null);
+	new AtomicReference<>(null);
 
 	private static final String MOCK_PROPERTY_SOURCE_NAME = "MockPropertySource";
 
@@ -72,12 +72,12 @@ public class SpringEnvironmentPropertySourcesCleanupIntegrationTests extends Int
 			super.after();
 
 			Optional.ofNullable(applicationContextReference.get())
-				.map(ConfigurableApplicationContext::getEnvironment)
-				.map(ConfigurableEnvironment::getPropertySources)
-				.filter(propertySources -> Boolean.FALSE.equals(propertySources.contains(MOCK_PROPERTY_SOURCE_NAME)))
-				//.map(success -> { System.err.println("SUCCESS!"); return success; })
-				.orElseThrow(() -> newIllegalStateException(String.format(
-					"Spring Environment should not contain the [%s] PropertySource", MOCK_PROPERTY_SOURCE_NAME)));
+			.map(ConfigurableApplicationContext::getEnvironment)
+			.map(ConfigurableEnvironment::getPropertySources)
+			.filter(propertySources -> Boolean.FALSE.equals(propertySources.contains(MOCK_PROPERTY_SOURCE_NAME)))
+			//.map(success -> { System.err.println("SUCCESS!"); return success; })
+			.orElseThrow(() -> newIllegalStateException(String.format(
+		"Spring Environment should not contain the [%s] PropertySource", MOCK_PROPERTY_SOURCE_NAME)));
 		}
 	};
 
@@ -113,17 +113,17 @@ public class SpringEnvironmentPropertySourcesCleanupIntegrationTests extends Int
 		public void addTestPropertySource(@NonNull ContextRefreshedEvent event) {
 
 			Optional.ofNullable(event)
-				.map(ContextRefreshedEvent::getApplicationContext)
-				.filter(ConfigurableApplicationContext.class::isInstance)
-				.map(ConfigurableApplicationContext.class::cast)
-				.map(ConfigurableApplicationContext::getEnvironment)
-				.map(ConfigurableEnvironment::getPropertySources)
-				.ifPresent(propertySources -> {
+			.map(ContextRefreshedEvent::getApplicationContext)
+			.filter(ConfigurableApplicationContext.class::isInstance)
+			.map(ConfigurableApplicationContext.class::cast)
+			.map(ConfigurableApplicationContext::getEnvironment)
+			.map(ConfigurableEnvironment::getPropertySources)
+			.ifPresent(propertySources -> {
 
-					MockPropertySource mockPropertySource = new MockPropertySource("MockPropertySource");
+				MockPropertySource mockPropertySource = new MockPropertySource("MockPropertySource");
 
-					propertySources.addLast(mockPropertySource);
-				});
+				propertySources.addLast(mockPropertySource);
+			});
 		}
 	}
 }

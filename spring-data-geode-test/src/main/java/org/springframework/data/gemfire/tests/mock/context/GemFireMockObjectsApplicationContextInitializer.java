@@ -36,7 +36,7 @@ import org.springframework.lang.NonNull;
  * @since 0.0.1
  */
 public class GemFireMockObjectsApplicationContextInitializer
-		implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
 	@Override
 	public void initialize(@NonNull ConfigurableApplicationContext applicationContext) {

@@ -82,7 +82,7 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 	private static ProcessWrapper gemfireServer;
 
 	public static @NonNull ProcessWrapper startGemFireServer(@NonNull Class<?> gemfireServerMainClass,
-			@NonNull String... arguments) throws IOException {
+	@NonNull String... arguments) throws IOException {
 
 		return startGemFireServer(new JavaProcessRunner() {
 
@@ -99,7 +99,7 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 	}
 
 	public static @NonNull ProcessWrapper startGemFireServer(@NonNull File workingDirectory,
-			@NonNull Class<?> gemfireServerMainClass, @NonNull String... arguments) throws IOException {
+	@NonNull Class<?> gemfireServerMainClass, @NonNull String... arguments) throws IOException {
 
 		return startGemFireServer(new JavaProcessRunner() {
 
@@ -121,7 +121,7 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 	}
 
 	public static @NonNull ProcessWrapper startGemFireServer(@NonNull String classpath,
-			@NonNull Class<?> gemfireServerMainClass, @NonNull String... arguments) throws IOException {
+	@NonNull Class<?> gemfireServerMainClass, @NonNull String... arguments) throws IOException {
 
 		return startGemFireServer(new JavaProcessRunner() {
 
@@ -143,7 +143,7 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 	}
 
 	public static @NonNull ProcessWrapper startGemFireServer(@NonNull File workingDirectory, @NonNull String classpath,
-			@NonNull Class<?> gemfireServerMainClass, @NonNull String... arguments) throws IOException {
+	@NonNull Class<?> gemfireServerMainClass, @NonNull String... arguments) throws IOException {
 
 		return startGemFireServer(new JavaProcessRunner() {
 
@@ -165,13 +165,13 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 			@Override
 			public ProcessWrapper run(String... arguments) throws IOException {
 				return ForkingClientServerIntegrationTestsSupport.run(getWorkingDirectory(),
-					getClassPath(), getMainClass(), arguments);
+				getClassPath(), getMainClass(), arguments);
 			}
 		}, arguments);
 	}
 
 	private static @NonNull ProcessWrapper startGemFireServer(@NonNull JavaProcessRunner processRunner,
-			@NonNull String... arguments) throws IOException {
+	@NonNull String... arguments) throws IOException {
 
 		int availablePort = setAndGetPoolPortProperty(setAndGetCacheServerPortProperty(findAndReserveAvailablePort()));
 
@@ -182,8 +182,8 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 		ProcessWrapper gemfireServerProcessWrapper = processRunner.run(argumentList);
 
 		gemfireServerProcessWrapper = gemfireServerProcessWrapper
-			.runningOn(InetAddress.getLocalHost().getHostAddress())
-			.listeningOn(availablePort);
+		.runningOn(InetAddress.getLocalHost().getHostAddress())
+		.listeningOn(availablePort);
 
 		setGemFireServerProcess(gemfireServerProcessWrapper);
 		waitForServerToStart("localhost", availablePort);
@@ -192,25 +192,25 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 	}
 
 	public static ProcessWrapper startGeodeServer(@NonNull Class<?> geodeServerMainClass, String... arguments)
-			throws IOException {
+	throws IOException {
 
 		return startGemFireServer(geodeServerMainClass, arguments);
 	}
 
 	public static ProcessWrapper startGeodeServer(@NonNull File workingDirectory,
-			@NonNull Class<?> geodeServerMainClass, String... arguments) throws IOException {
+	@NonNull Class<?> geodeServerMainClass, String... arguments) throws IOException {
 
 		return startGemFireServer(workingDirectory, geodeServerMainClass, arguments);
 	}
 
 	public static ProcessWrapper startGeodeServer(@NonNull String classpath,
-			@NonNull Class<?> geodeServerMainClass, String... arguments) throws IOException {
+	@NonNull Class<?> geodeServerMainClass, String... arguments) throws IOException {
 
 		return startGemFireServer(classpath, geodeServerMainClass, arguments);
 	}
 
 	public static ProcessWrapper startGeodeServer(@NonNull File workingDirectory, @NonNull String classpath,
-			@NonNull Class<?> geodeServerMainClass, String... arguments) throws IOException {
+	@NonNull Class<?> geodeServerMainClass, String... arguments) throws IOException {
 
 		return startGemFireServer(workingDirectory, classpath, geodeServerMainClass, arguments);
 	}
@@ -236,8 +236,8 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 
 		if (isTestDirectoryRemovalEnabled()) {
 			getGemFireServerProcess()
-				.map(ProcessWrapper::getWorkingDirectory)
-				.ifPresent(IntegrationTestsSupport::removeRecursiveDirectory);
+			.map(ProcessWrapper::getWorkingDirectory)
+			.ifPresent(IntegrationTestsSupport::removeRecursiveDirectory);
 		}
 
 		setGemFireServerProcess(null);
@@ -245,7 +245,7 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 
 	private static boolean isTestDirectoryRemovalEnabled() {
 		return !System.getProperties().containsKey(REMOVE_TEST_DIRECTORY_PROPERTY)
-			|| Boolean.getBoolean(REMOVE_TEST_DIRECTORY_PROPERTY);
+		|| Boolean.getBoolean(REMOVE_TEST_DIRECTORY_PROPERTY);
 	}
 
 	@AfterClass
@@ -264,7 +264,8 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 
 	@EnablePdx
 	@ClientCacheApplication
-	public static class BaseGemFireClientConfiguration extends ClientServerIntegrationTestsConfiguration { }
+	public static class BaseGemFireClientConfiguration extends ClientServerIntegrationTestsConfiguration {
+	}
 
 	@EnablePdx
 	@CacheServerApplication(name = "ForkingClientServerIntegrationTestsSupport")
@@ -273,7 +274,7 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 		public static void main(String[] args) {
 
 			AnnotationConfigApplicationContext applicationContext =
-				new AnnotationConfigApplicationContext(BaseGemFireServerConfiguration.class);
+			new AnnotationConfigApplicationContext(BaseGemFireServerConfiguration.class);
 
 			applicationContext.registerShutdownHook();
 		}
@@ -291,16 +292,16 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 		public void configureTerminator(@NonNull ContextRefreshedEvent event) {
 
 			Function<ApplicationContext, SpringApplicationTerminatorConfigurer> safeSpringApplicationTerminatorConfigurerResolver =
-				applicationContext -> SpringUtils.safeGetValue(() ->
-						applicationContext.getBean(SpringApplicationTerminatorConfigurer.class),
-					(SpringApplicationTerminatorConfigurer) null);
+			applicationContext -> SpringUtils.safeGetValue(() ->
+		applicationContext.getBean(SpringApplicationTerminatorConfigurer.class),
+		(SpringApplicationTerminatorConfigurer) null);
 
 			Runnable springApplicationTerminatorRunnable = () -> System.exit(-1);
 
 			ThreadFactory springApplicationTerminatorThreadFactory = runnable -> {
 
 				Thread springApplicationTerminatorThread =
-					new Thread(runnable, "Spring Application Terminator Thread");
+				new Thread(runnable, "Spring Application Terminator Thread");
 
 				springApplicationTerminatorThread.setDaemon(true);
 				springApplicationTerminatorThread.setPriority(Thread.NORM_PRIORITY);
@@ -309,23 +310,23 @@ public abstract class ForkingClientServerIntegrationTestsSupport extends ClientS
 			};
 
 			Optional.ofNullable(event)
-				.map(ContextRefreshedEvent::getApplicationContext)
-				.map(safeSpringApplicationTerminatorConfigurerResolver)
-				.filter(SpringApplicationTerminatorConfigurer::isNotEmpty)
-				.filter(this::delayIsGreaterThanZero)
-				.ifPresent(configurer ->
-					Executors.newScheduledThreadPool(1, springApplicationTerminatorThreadFactory)
-						.schedule(springApplicationTerminatorRunnable, configurer.delay().toMillis(),
-							TimeUnit.MILLISECONDS)
-				);
+			.map(ContextRefreshedEvent::getApplicationContext)
+			.map(safeSpringApplicationTerminatorConfigurerResolver)
+			.filter(SpringApplicationTerminatorConfigurer::isNotEmpty)
+			.filter(this::delayIsGreaterThanZero)
+			.ifPresent(configurer ->
+		Executors.newScheduledThreadPool(1, springApplicationTerminatorThreadFactory)
+		.schedule(springApplicationTerminatorRunnable, configurer.delay().toMillis(),
+	TimeUnit.MILLISECONDS)
+			);
 		}
 
 		private boolean delayIsGreaterThanZero(@NonNull SpringApplicationTerminatorConfigurer configurer) {
 
 			return Optional.ofNullable(configurer)
-				.map(SpringApplicationTerminatorConfigurer::delay)
-				.map(delay -> Duration.ZERO.compareTo(delay) > 0)
-				.orElse(false);
+			.map(SpringApplicationTerminatorConfigurer::delay)
+			.map(delay -> Duration.ZERO.compareTo(delay) > 0)
+			.orElse(false);
 		}
 	}
 

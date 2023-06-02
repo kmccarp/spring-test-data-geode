@@ -36,15 +36,15 @@ import org.springframework.lang.Nullable;
 public abstract class SpringUtils extends org.springframework.data.gemfire.util.SpringExtensions {
 
 	public static final Function<ConfigurableApplicationContext, Boolean> APPLICATION_CONTEXT_CLOSING_FUNCTION =
-		applicationContext -> {
+	applicationContext -> {
 
-			if (applicationContext != null) {
-				applicationContext.close();
-				return true;
-			}
+		if (applicationContext != null) {
+			applicationContext.close();
+			return true;
+		}
 
-			return false;
-		};
+		return false;
+	};
 
 	/**
 	 * Determines whether the given {@link ApplicationContext} is still {@literal active}.
@@ -63,10 +63,10 @@ public abstract class SpringUtils extends org.springframework.data.gemfire.util.
 	public static boolean isApplicationContextActive(@Nullable ApplicationContext applicationContext) {
 
 		return Optional.ofNullable(applicationContext)
-			.filter(ConfigurableApplicationContext.class::isInstance)
-			.map(ConfigurableApplicationContext.class::cast)
-			.map(ConfigurableApplicationContext::isActive)
-			.orElse(false);
+		.filter(ConfigurableApplicationContext.class::isInstance)
+		.map(ConfigurableApplicationContext.class::cast)
+		.map(ConfigurableApplicationContext::isActive)
+		.orElse(false);
 	}
 
 	/**
@@ -79,9 +79,9 @@ public abstract class SpringUtils extends org.springframework.data.gemfire.util.
 	public static boolean closeApplicationContext(@Nullable ApplicationContext applicationContext) {
 
 		return Optional.ofNullable(applicationContext)
-			.filter(ConfigurableApplicationContext.class::isInstance)
-			.map(ConfigurableApplicationContext.class::cast)
-			.map(APPLICATION_CONTEXT_CLOSING_FUNCTION)
-			.orElse(false);
+		.filter(ConfigurableApplicationContext.class::isInstance)
+		.map(ConfigurableApplicationContext.class::cast)
+		.map(APPLICATION_CONTEXT_CLOSING_FUNCTION)
+		.orElse(false);
 	}
 }

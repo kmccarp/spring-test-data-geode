@@ -37,7 +37,7 @@ import org.springframework.lang.NonNull;
  */
 @SuppressWarnings("unused")
 public abstract class SpringBootApplicationIntegrationTestsSupport
-		extends SpringApplicationContextIntegrationTestsSupport {
+extends SpringApplicationContextIntegrationTestsSupport {
 
 	protected static final String[] EMPTY_STRING_ARRAY = {};
 
@@ -53,11 +53,11 @@ public abstract class SpringBootApplicationIntegrationTestsSupport
 	protected @NonNull ConfigurableApplicationContext newApplicationContext(Class<?>... annotatedClasses) {
 
 		return setApplicationContext(processBeforeRun(processBeforeBuild(
-			newSpringApplicationBuilder(annotatedClasses)
-				.initializers(this::processBeforeRefresh)
-				.web(getWebApplicationType()))
-				.build())
-				.run(getArguments()));
+		newSpringApplicationBuilder(annotatedClasses)
+	.initializers(this::processBeforeRefresh)
+	.web(getWebApplicationType()))
+		.build())
+		.run(getArguments()));
 	}
 
 	protected @NonNull SpringApplicationBuilder newSpringApplicationBuilder(Class<?>... annotatedClasses) {

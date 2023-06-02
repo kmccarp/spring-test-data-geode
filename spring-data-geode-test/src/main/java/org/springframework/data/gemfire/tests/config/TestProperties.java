@@ -174,7 +174,7 @@ public class TestProperties implements Iterable<String> {
 	protected @NonNull String toSystemPropertyName(@Nullable String propertyName) {
 
 		return isTestSystemProperty(propertyName) ? propertyName
-			: SYSTEM_PROPERTY_PREFIX.concat(toNonNullPropertyName(propertyName));
+		: SYSTEM_PROPERTY_PREFIX.concat(toNonNullPropertyName(propertyName));
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class TestProperties implements Iterable<String> {
 	public void configureSystemProperties() {
 
 		getSystemPropertyNames()
-			.forEach(property -> System.setProperty(stripSystemPropertyPrefix(property), get(property)));
+		.forEach(property -> System.setProperty(stripSystemPropertyPrefix(property), get(property)));
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class TestProperties implements Iterable<String> {
 		String propertyValue = testProperties.getProperty(resolvedPropertyName);
 
 		return propertyValue != null ? propertyValue
-			: testProperties.getProperty(toSystemPropertyName(resolvedPropertyName));
+		: testProperties.getProperty(toSystemPropertyName(resolvedPropertyName));
 	}
 
 	/**
@@ -272,16 +272,16 @@ public class TestProperties implements Iterable<String> {
 	public Set<String> getSystemPropertyNames(boolean normalize) {
 
 		return getPropertyNames().stream()
-			.filter(this::isTestSystemProperty)
-			.map(propertyName -> normalize ? stripSystemPropertyPrefix(propertyName) : propertyName)
-			.collect(Collectors.toSet());
+		.filter(this::isTestSystemProperty)
+		.map(propertyName -> normalize ? stripSystemPropertyPrefix(propertyName) : propertyName)
+		.collect(Collectors.toSet());
 	}
 
 	String stripSystemPropertyPrefix(@NonNull String propertyName) {
 
 		return propertyName.startsWith(SYSTEM_PROPERTY_PREFIX)
-			? propertyName.substring(SYSTEM_PROPERTY_PREFIX.length())
-			: propertyName;
+		? propertyName.substring(SYSTEM_PROPERTY_PREFIX.length())
+		: propertyName;
 	}
 
 	/**
@@ -306,8 +306,8 @@ public class TestProperties implements Iterable<String> {
 	public @NonNull String requireProperty(@NonNull String propertyName) {
 
 		return Optional.ofNullable(get(propertyName))
-			.filter(StringUtils::hasText)
-			.orElseThrow(() -> newIllegalStateException("Property [%s] is undefined", propertyName));
+		.filter(StringUtils::hasText)
+		.orElseThrow(() -> newIllegalStateException("Property [%s] is undefined", propertyName));
 	}
 
 	/**

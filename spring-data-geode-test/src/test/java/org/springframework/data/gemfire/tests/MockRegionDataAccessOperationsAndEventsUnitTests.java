@@ -98,7 +98,7 @@ public class MockRegionDataAccessOperationsAndEventsUnitTests {
 	public void setup() {
 
 		this.mockRegion = GemFireMockObjectsSupport.mockRegion(this.mockRegionService,
-			"MockRegion", this.mockRegionAttributes);
+		"MockRegion", this.mockRegionAttributes);
 	}
 
 	@After
@@ -450,10 +450,10 @@ public class MockRegionDataAccessOperationsAndEventsUnitTests {
 		}).when(this.mockRegion).putAll(any(Map.class));
 
 		Map<Object, Object> keysValues = MapBuilder.newMapBuilder()
-			.put(1, "mock")
-			.put(2, "test")
-			.put(3, "stub")
-			.build();
+		.put(1, "mock")
+		.put(2, "test")
+		.put(3, "stub")
+		.build();
 
 		assertThat(this.mockRegion).hasSize(0);
 
@@ -576,12 +576,12 @@ public class MockRegionDataAccessOperationsAndEventsUnitTests {
 	public void regionGetAllKeysIsCorrect() {
 
 		Map<Object, Object> expectedResults = MapBuilder.newMapBuilder()
-			.put(1, "ONE")
-			.put(2, "TWO")
-			.put(3, "THREE")
-			.put(4, "FOUR")
-			.put(5, null)
-			.build();
+		.put(1, "ONE")
+		.put(2, "TWO")
+		.put(3, "THREE")
+		.put(4, "FOUR")
+		.put(5, null)
+		.build();
 
 		List<Object> keys = Arrays.asList(null, 1, 2, null, 3, null, 4, 5);
 
@@ -715,9 +715,9 @@ public class MockRegionDataAccessOperationsAndEventsUnitTests {
 	public void mapRegionPutAllIsCorrect() {
 
 		Map<Object, Object> map = MapBuilder.newMapBuilder()
-			.put(1, "TEST")
-			.put(2, "MOCK")
-			.build();
+		.put(1, "TEST")
+		.put(2, "MOCK")
+		.build();
 
 		assertThat(this.mockRegion).isEmpty();
 

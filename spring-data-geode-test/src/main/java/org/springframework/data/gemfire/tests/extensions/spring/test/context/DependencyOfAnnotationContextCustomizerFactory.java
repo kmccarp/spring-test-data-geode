@@ -43,7 +43,7 @@ public class DependencyOfAnnotationContextCustomizerFactory implements ContextCu
 	 */
 	@Override
 	public @NonNull ContextCustomizer createContextCustomizer(@NonNull Class<?> testClass,
-			@NonNull List<ContextConfigurationAttributes> configAttributes) {
+	@NonNull List<ContextConfigurationAttributes> configAttributes) {
 
 		return new DependencyOfAnnotationContextCustomizer();
 	}

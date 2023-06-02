@@ -73,7 +73,7 @@ public abstract class ProcessUtils {
 		}
 
 		throw new PidNotFoundException(String.format("Process ID (PID) not available [%s]",
-			runtimeMXBeanName), cause);
+		runtimeMXBeanName), cause);
 	}
 
 	public static boolean isAlive(Process process) {
@@ -101,8 +101,8 @@ public abstract class ProcessUtils {
 
 		if (pidFile == null) {
 			throw new PidNotFoundException(
-				String.format("No PID file was found in working directory [%s] or any of it's sub-directories",
-					workingDirectory));
+			String.format("No PID file was found in working directory [%s] or any of it's sub-directories",
+		workingDirectory));
 		}
 
 		return readPid(pidFile);
@@ -111,7 +111,7 @@ public abstract class ProcessUtils {
 	protected static File findPidFile(File workingDirectory) {
 
 		Assert.isTrue(FileSystemUtils.isDirectory(workingDirectory),
-			String.format("File [%s] is not a valid directory", workingDirectory));
+		String.format("File [%s] is not a valid directory", workingDirectory));
 
 		for (File file : workingDirectory.listFiles(DirectoryPidFileFilter.INSTANCE)) {
 			if (file.isDirectory()) {
@@ -129,7 +129,7 @@ public abstract class ProcessUtils {
 	public static int readPid(File pidFile) {
 
 		Assert.isTrue(pidFile != null && pidFile.isFile(),
-			String.format("File [%s] is not a valid file", pidFile));
+		String.format("File [%s] is not a valid file", pidFile));
 
 		BufferedReader fileReader = null;
 
@@ -150,7 +150,7 @@ public abstract class ProcessUtils {
 		}
 		catch (NumberFormatException cause) {
 			throw new PidNotFoundException(String.format("Value [%1$s] from PID file [%2$s] was not a valid numerical PID",
-				pidValue, pidFile), cause);
+			pidValue, pidFile), cause);
 		}
 		finally {
 			IOUtils.close(fileReader);
@@ -160,12 +160,12 @@ public abstract class ProcessUtils {
 	public static void writePid(File pidFile, int pid) throws IOException {
 
 		Assert.isTrue(pidFile != null && (pidFile.isFile() || pidFile.createNewFile()),
-			String.format("File [%s] is not a valid file", pidFile));
+		String.format("File [%s] is not a valid file", pidFile));
 
 		Assert.isTrue(pid > 0, String.format("PID [%d] must greater than 0", pid));
 
 		PrintWriter fileWriter = new PrintWriter(new BufferedWriter(
-			new FileWriter(pidFile, false), 16), true);
+		new FileWriter(pidFile, false), 16), true);
 
 		try {
 			fileWriter.println(pid);
@@ -190,7 +190,7 @@ public abstract class ProcessUtils {
 
 		Scanner in = new Scanner(System.in);
 
-		while (!TERM_TOKEN.equals(in.next()));
+		while (!TERM_TOKEN.equals(in.next())) ;
 	}
 
 	protected static class DirectoryPidFileFilter extends PidFileFilter {

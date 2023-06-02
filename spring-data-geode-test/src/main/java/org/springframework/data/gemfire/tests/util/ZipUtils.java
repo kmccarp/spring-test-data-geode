@@ -45,7 +45,7 @@ public abstract class ZipUtils {
 		Assert.notNull(zipResource, "ZIP Resource is required");
 
 		Assert.isTrue(directory != null && directory.isDirectory(),
-			String.format("The file system pathname (%1$s) is not a valid directory!", directory));
+		String.format("The file system pathname (%1$s) is not a valid directory!", directory));
 
 		ZipFile zipFile = new ZipFile(zipResource.getFile(), ZipFile.OPEN_READ);
 
@@ -59,7 +59,7 @@ public abstract class ZipUtils {
 				DataInputStream entryInputStream = new DataInputStream(zipFile.getInputStream(entry));
 
 				DataOutputStream entryOutputStream = new DataOutputStream(new FileOutputStream(
-					new File(directory, entry.getName())));
+				new File(directory, entry.getName())));
 
 				try {
 					FileCopyUtils.copy(entryInputStream, entryOutputStream);

@@ -35,9 +35,9 @@ public class IntegrationTestsSupportUnitTests {
 		String directoryName = IntegrationTestsSupport.asDirectoryName(OuterType.InnerType.class);
 
 		Object[] args = {
-			IntegrationTestsSupportUnitTests.class.getSimpleName(),
-			OuterType.class.getSimpleName(),
-			OuterType.InnerType.class.getSimpleName()
+		IntegrationTestsSupportUnitTests.class.getSimpleName(),
+		OuterType.class.getSimpleName(),
+		OuterType.InnerType.class.getSimpleName()
 		};
 
 		assertThat(directoryName).isNotBlank();
@@ -45,6 +45,7 @@ public class IntegrationTestsSupportUnitTests {
 	}
 
 	interface OuterType {
-		interface InnerType { }
+		interface InnerType {
+		}
 	}
 }

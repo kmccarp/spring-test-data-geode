@@ -64,7 +64,7 @@ import lombok.RequiredArgsConstructor;
 @RunWith(SpringRunner.class)
 @ContextConfiguration
 public class GemfireTemplateAndGemfireRepositoryUsingMockRegionOperationsIntegrationTests
-		extends IntegrationTestsSupport {
+extends IntegrationTestsSupport {
 
 	private final Customer jonDoe = Customer.newCustomer(1L, "Jon Doe");
 
@@ -125,7 +125,7 @@ public class GemfireTemplateAndGemfireRepositoryUsingMockRegionOperationsIntegra
 		GemfireRepositoryFactoryBean<CustomerRepository, Customer, Long> customersRepositoryFactoryBean() {
 
 			GemfireRepositoryFactoryBean<CustomerRepository, Customer, Long> repositoryFactoryBean =
-				new GemfireRepositoryFactoryBean<>(CustomerRepository.class);
+			new GemfireRepositoryFactoryBean<>(CustomerRepository.class);
 
 			repositoryFactoryBean.setGemfireMappingContext(new GemfireMappingContext());
 
@@ -138,7 +138,8 @@ public class GemfireTemplateAndGemfireRepositoryUsingMockRegionOperationsIntegra
 	@org.springframework.data.gemfire.mapping.annotation.Region("Customers")
 	static class Customer {
 
-		@Id @NonNull
+		@Id
+		@NonNull
 		private Long id;
 
 		@NonNull
@@ -146,6 +147,7 @@ public class GemfireTemplateAndGemfireRepositoryUsingMockRegionOperationsIntegra
 
 	}
 
-	interface CustomerRepository extends GemfireRepository<Customer, Long> { }
+	interface CustomerRepository extends GemfireRepository<Customer, Long> {
+	}
 
 }

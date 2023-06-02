@@ -70,7 +70,7 @@ public class CacheAndClientCacheFactorySpiesConfiguresMockCacheNameUnitTests {
 		assertThat(mockCache.getDistributedSystem()).isNotNull();
 		assertThat(mockCache.getDistributedSystem().getProperties()).isNotNull();
 		assertThat(mockCache.getDistributedSystem().getProperties().getProperty(DistributionConfig.NAME_NAME))
-			.isEqualTo("MockCacheName");
+		.isEqualTo("MockCacheName");
 		assertThat(mockCache.getName()).isEqualTo("MockCacheName");
 	}
 
@@ -78,7 +78,7 @@ public class CacheAndClientCacheFactorySpiesConfiguresMockCacheNameUnitTests {
 	public void clientCacheFactorySpyConfigureMockClientCacheName() {
 
 		ClientCacheFactory clientCacheFactory = GemFireMockObjectsSupport.spyOn(new ClientCacheFactory()
-			.set(DistributionConfig.NAME_NAME, "MockClientCacheName"));
+		.set(DistributionConfig.NAME_NAME, "MockClientCacheName"));
 
 		assertThat(clientCacheFactory).isNotNull();
 
@@ -89,7 +89,7 @@ public class CacheAndClientCacheFactorySpiesConfiguresMockCacheNameUnitTests {
 		assertThat(mockClientCache.getDistributedSystem()).isNotNull();
 		assertThat(mockClientCache.getDistributedSystem().getProperties()).isNotNull();
 		assertThat(mockClientCache.getDistributedSystem().getProperties().getProperty(DistributionConfig.NAME_NAME))
-			.isEqualTo("MockClientCacheName");
+		.isEqualTo("MockClientCacheName");
 		assertThat(mockClientCache.getName()).isEqualTo("MockClientCacheName");
 	}
 }

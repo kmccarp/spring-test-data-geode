@@ -56,23 +56,23 @@ public class GemFireResourceCollectorConfiguration extends AbstractAnnotationCon
 	private boolean tryCleanDiskStoreFiles = DEFAULT_CLEAN_DISK_STORE_FILES;
 
 	@SuppressWarnings("unchecked")
-	private Class<? extends ApplicationEvent>[] collectorEventTypes = new Class[] { AfterTestClassEvent.class };
+	private Class<? extends ApplicationEvent>[] collectorEventTypes = new Class[]{AfterTestClassEvent.class};
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public void setImportMetadata(@NonNull AnnotationMetadata importMetadata) {
 
 		Optional.of(importMetadata)
-			.filter(this::isAnnotationPresent)
-			.map(this::getAnnotationAttributes)
-			.ifPresent(enableGemFireResourceCollectorAttributes -> {
+		.filter(this::isAnnotationPresent)
+		.map(this::getAnnotationAttributes)
+		.ifPresent(enableGemFireResourceCollectorAttributes -> {
 
-				this.collectorEventTypes = (Class<? extends ApplicationEvent>[])
-					enableGemFireResourceCollectorAttributes.getClassArray("collectOnEvents");
+			this.collectorEventTypes = (Class<? extends ApplicationEvent>[])
+		enableGemFireResourceCollectorAttributes.getClassArray("collectOnEvents");
 
-				this.tryCleanDiskStoreFiles =
-					enableGemFireResourceCollectorAttributes.getBoolean("tryCleanDiskStoreFiles");
-			});
+			this.tryCleanDiskStoreFiles =
+		enableGemFireResourceCollectorAttributes.getBoolean("tryCleanDiskStoreFiles");
+		});
 	}
 
 	@Override
@@ -92,6 +92,6 @@ public class GemFireResourceCollectorConfiguration extends AbstractAnnotationCon
 	@Bean
 	ApplicationListener<ApplicationEvent> gemfireResourceCollectorApplicationListener() {
 		return GemFireResourceCollectorApplicationListener.create(getConfiguredCollectorEventTypes())
-			.tryCleanDiskStoreFiles(isTryCleanDiskStoreFiles());
+		.tryCleanDiskStoreFiles(isTryCleanDiskStoreFiles());
 	}
 }

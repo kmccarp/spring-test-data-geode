@@ -112,7 +112,7 @@ public class GemFireMockObjectsSupportIntegrationTests extends IntegrationTestsS
 			gemfireProperties.setProperty("groups", "test,mock");
 
 			CacheFactory mockCacheFactory =
-				GemFireMockObjectsSupport.spyOn(new CacheFactory(gemfireProperties));
+			GemFireMockObjectsSupport.spyOn(new CacheFactory(gemfireProperties));
 
 			mockCacheFactory.set("groups", "qa,test,testers");
 			mockCacheFactory.set("conserve-sockets", "true");

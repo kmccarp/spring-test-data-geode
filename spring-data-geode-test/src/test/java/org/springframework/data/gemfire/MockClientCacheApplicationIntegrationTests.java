@@ -60,59 +60,59 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SuppressWarnings("all")
 public class MockClientCacheApplicationIntegrationTests {
 
-  @Autowired
-  private ClientCache clientCache;
+	@Autowired
+	private ClientCache clientCache;
 
-  @Resource(name = "Example")
-  private Region<Object, Object> example;
+	@Resource(name = "Example")
+	private Region<Object, Object> example;
 
-  @Test
-  public void clientCacheIsMocked() {
+	@Test
+	public void clientCacheIsMocked() {
 
-    assertThat(this.clientCache).isNotNull();
-    assertThat(this.clientCache).isInstanceOf(ClientCache.class);
-    assertThat(this.clientCache).isNotInstanceOf(GemFireCacheImpl.class);
-    assertThat(this.clientCache.isClosed()).isFalse();
+		assertThat(this.clientCache).isNotNull();
+		assertThat(this.clientCache).isInstanceOf(ClientCache.class);
+		assertThat(this.clientCache).isNotInstanceOf(GemFireCacheImpl.class);
+		assertThat(this.clientCache.isClosed()).isFalse();
 
-    Set<Region<?, ?>> rootRegions = this.clientCache.rootRegions();
+		Set<Region<?, ?>> rootRegions = this.clientCache.rootRegions();
 
-    assertThat(rootRegions).isNotNull();
-    assertThat(rootRegions).hasSize(1);
-    assertThat(rootRegions).containsExactly(this.example);
-  }
+		assertThat(rootRegions).isNotNull();
+		assertThat(rootRegions).hasSize(1);
+		assertThat(rootRegions).containsExactly(this.example);
+	}
 
-  @Test
-  public void exampleRegionIsMocked() {
+	@Test
+	public void exampleRegionIsMocked() {
 
-    assertThat(this.example).isNotNull();
-    assertThat(this.example.getFullPath()).isEqualTo(RegionUtils.toRegionPath("Example"));
-    assertThat(this.example.getName()).isEqualTo("Example");
-    assertThat(this.example.put(1, "test")).isNull();
-    assertThat(this.example.get(1)).isEqualTo("test");
-    assertThat(this.example.containsKey(1)).isTrue();
+		assertThat(this.example).isNotNull();
+		assertThat(this.example.getFullPath()).isEqualTo(RegionUtils.toRegionPath("Example"));
+		assertThat(this.example.getName()).isEqualTo("Example");
+		assertThat(this.example.put(1, "test")).isNull();
+		assertThat(this.example.get(1)).isEqualTo("test");
+		assertThat(this.example.containsKey(1)).isTrue();
 
-    this.example.invalidate(1);
+		this.example.invalidate(1);
 
-    assertThat(this.example.containsKey(1)).isTrue();
-    assertThat(this.example.get(1)).isNull();
-    assertThat(this.example.remove(1)).isNull();
-    assertThat(this.example.containsKey(1)).isFalse();
-  }
+		assertThat(this.example.containsKey(1)).isTrue();
+		assertThat(this.example.get(1)).isNull();
+		assertThat(this.example.remove(1)).isNull();
+		assertThat(this.example.containsKey(1)).isFalse();
+	}
 
-  @ClientCacheApplication
-  @EnableGemFireMockObjects
-  static class TestConfiguration {
+	@ClientCacheApplication
+	@EnableGemFireMockObjects
+	static class TestConfiguration {
 
-    @Bean("Example")
-    public ClientRegionFactoryBean<Object, Object> exampleRegion(GemFireCache gemfireCache) {
+		@Bean("Example")
+		public ClientRegionFactoryBean<Object, Object> exampleRegion(GemFireCache gemfireCache) {
 
-      ClientRegionFactoryBean<Object, Object> exampleRegion = new ClientRegionFactoryBean<>();
+			ClientRegionFactoryBean<Object, Object> exampleRegion = new ClientRegionFactoryBean<>();
 
-      exampleRegion.setCache(gemfireCache);
-      exampleRegion.setClose(false);
-      exampleRegion.setShortcut(ClientRegionShortcut.LOCAL);
+			exampleRegion.setCache(gemfireCache);
+			exampleRegion.setClose(false);
+			exampleRegion.setShortcut(ClientRegionShortcut.LOCAL);
 
-      return exampleRegion;
-    }
-  }
+			return exampleRegion;
+		}
+	}
 }

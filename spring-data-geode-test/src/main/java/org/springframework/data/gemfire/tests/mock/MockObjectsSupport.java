@@ -61,8 +61,8 @@ public abstract class MockObjectsSupport {
 	public static String mockObjectIdentifier(String mockObjectName) {
 
 		String resolvedMockObjectName = Optional.ofNullable(mockObjectName)
-			.filter(StringUtils::hasText)
-			.orElse(DEFAULT_MOCK_OBJECT_NAME);
+		.filter(StringUtils::hasText)
+		.orElse(DEFAULT_MOCK_OBJECT_NAME);
 
 		return String.format("%s%d", resolvedMockObjectName, mockObjectIdentifier.incrementAndGet());
 	}
@@ -168,7 +168,7 @@ public abstract class MockObjectsSupport {
 	}
 
 	protected static <T, R> Answer<R> newSetterWithArgument(AtomicReference<T> argument, T value,
-			Supplier<R> returnValue) {
+	Supplier<R> returnValue) {
 
 		return invocation -> {
 			argument.set(value);
@@ -181,7 +181,7 @@ public abstract class MockObjectsSupport {
 	}
 
 	protected static <T, R> Answer<R> newSetter(AtomicReference<T> argument, Function<?, T> converter,
-			Supplier<R> returnValue) {
+	Supplier<R> returnValue) {
 
 		return invocation -> {
 			argument.set(converter.apply(invocation.getArgument(0)));

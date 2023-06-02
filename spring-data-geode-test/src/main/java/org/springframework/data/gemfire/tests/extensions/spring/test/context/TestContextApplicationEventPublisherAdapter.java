@@ -77,8 +77,8 @@ public class TestContextApplicationEventPublisherAdapter implements ApplicationE
 	protected Optional<ApplicationEventPublisher> getApplicationEventPublisher() {
 
 		return Optional.ofNullable(getTestContext())
-			.filter(TestContext::hasApplicationContext)
-			.map(TestContext::getApplicationContext);
+		.filter(TestContext::hasApplicationContext)
+		.map(TestContext::getApplicationContext);
 	}
 
 	/**
@@ -87,6 +87,6 @@ public class TestContextApplicationEventPublisherAdapter implements ApplicationE
 	@Override
 	public void publishEvent(@NonNull Object event) {
 		getApplicationEventPublisher().ifPresent(applicationEventPublisher ->
-			applicationEventPublisher.publishEvent(event));
+		applicationEventPublisher.publishEvent(event));
 	}
 }

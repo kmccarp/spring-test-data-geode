@@ -47,11 +47,11 @@ public abstract class ReflectionUtils extends org.springframework.util.Reflectio
 		Field field = findField(target.getClass(), fieldName);
 
 		return Optional.ofNullable(field)
-			.map(ReflectionUtils::makeAccessibleReturnField)
-			.map(it -> (T) getField(it, target))
-			.orElseThrow(() ->
-				new NoSuchFieldException(String.format("Field with name [%s] was not found on Object of type [%s]",
-					fieldName, target.getClass().getName())));
+		.map(ReflectionUtils::makeAccessibleReturnField)
+		.map(it -> (T) getField(it, target))
+		.orElseThrow(() ->
+	new NoSuchFieldException(String.format("Field with name [%s] was not found on Object of type [%s]",
+	fieldName, target.getClass().getName())));
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -82,8 +82,8 @@ public abstract class ReflectionUtils extends org.springframework.util.Reflectio
 			Class<?> fieldType = field.getType();
 
 			Assert.isTrue(value == null || fieldType.isInstance(value),
-				String.format("The value type [%1$s] is not assignment compatible with the field type [%2$s]",
-					ObjectUtils.nullSafeClassName(value), fieldType.getName()));
+			String.format("The value type [%1$s] is not assignment compatible with the field type [%2$s]",
+		ObjectUtils.nullSafeClassName(value), fieldType.getName()));
 
 			makeAccessibleReturnField(field);
 			setField(field, target, value);
@@ -92,7 +92,7 @@ public abstract class ReflectionUtils extends org.springframework.util.Reflectio
 		}
 		else {
 			throw new NoSuchFieldException(String.format("Field [%s] was not found on Object of type [%s]",
-				fieldName, target.getClass().getName()));
+			fieldName, target.getClass().getName()));
 		}
 	}
 }

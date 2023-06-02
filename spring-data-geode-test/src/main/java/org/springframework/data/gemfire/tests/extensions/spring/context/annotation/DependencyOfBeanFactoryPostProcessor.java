@@ -54,38 +54,38 @@ public class DependencyOfBeanFactoryPostProcessor implements BeanFactoryPostProc
 	public void postProcessBeanFactory(@NonNull ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
 		String[] dependencyOfAnnotatedBeanNames =
-			ArrayUtils.nullSafeArray(beanFactory.getBeanNamesForAnnotation(DEPENDENCY_OF_TYPE), String.class);
+		ArrayUtils.nullSafeArray(beanFactory.getBeanNamesForAnnotation(DEPENDENCY_OF_TYPE), String.class);
 
 		for (String beanName : dependencyOfAnnotatedBeanNames) {
 
 			Annotation dependencyOf = beanFactory.findAnnotationOnBean(beanName, DEPENDENCY_OF_TYPE);
 
 			Optional.ofNullable(dependencyOf)
-				.map(this::getAnnotationAttributes)
-				.map(this::getValueAttribute)
-				.ifPresent(dependentBeanNames -> {
-					for (String dependentBeanName : dependentBeanNames) {
-						Optional.ofNullable(dependentBeanName)
-							.filter(StringUtils::hasText)
-							.map(beanFactory::getBeanDefinition)
-							.ifPresent(dependentBeanDefinition ->
-								SpringUtils.addDependsOn(dependentBeanDefinition, beanName));
-					}
-				});
+			.map(this::getAnnotationAttributes)
+			.map(this::getValueAttribute)
+			.ifPresent(dependentBeanNames -> {
+				for (String dependentBeanName : dependentBeanNames) {
+					Optional.ofNullable(dependentBeanName)
+				.filter(StringUtils::hasText)
+				.map(beanFactory::getBeanDefinition)
+				.ifPresent(dependentBeanDefinition ->
+				SpringUtils.addDependsOn(dependentBeanDefinition, beanName));
+				}
+			});
 		}
 	}
 
 	private @Nullable AnnotationAttributes getAnnotationAttributes(@NonNull Annotation annotation) {
 
 		return annotation != null
-			? AnnotationAttributes.fromMap(AnnotationUtils.getAnnotationAttributes(annotation))
-			: null;
+		? AnnotationAttributes.fromMap(AnnotationUtils.getAnnotationAttributes(annotation))
+		: null;
 	}
 
 	private @Nullable String[] getValueAttribute(@NonNull AnnotationAttributes annotationAttributes) {
 
 		return annotationAttributes != null
-			? annotationAttributes.getStringArray(VALUE_ATTRIBUTE_NAME)
-			: null;
+		? annotationAttributes.getStringArray(VALUE_ATTRIBUTE_NAME)
+		: null;
 	}
 }
