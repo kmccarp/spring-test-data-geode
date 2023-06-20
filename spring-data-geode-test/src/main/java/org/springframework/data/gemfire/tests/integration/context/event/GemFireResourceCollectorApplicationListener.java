@@ -329,8 +329,9 @@ public class GemFireResourceCollectorApplicationListener
 			collectGemFireResources(getSearchDirectory());
 		}
 
-		if (isTryCleanDiskStoreFilesEnabled())
+		if (isTryCleanDiskStoreFilesEnabled()) {
 			collectGemFireDiskStoreFiles();
+		}
 	}
 
 	/**

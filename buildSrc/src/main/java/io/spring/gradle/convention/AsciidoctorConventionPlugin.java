@@ -145,7 +145,7 @@ public class AsciidoctorConventionPlugin implements Plugin<Project> {
 		documentationResources.getDependencies()
 			.add(project.getDependencies().create(SPRING_DOC_RESOURCES_DEPENDENCY));
 
-		Sync unzipResources = project.getTasks().create("unzipDocumentationResources", Sync.class, sync -> {
+		return project.getTasks().create("unzipDocumentationResources", Sync.class, sync -> {
 
 			sync.dependsOn(documentationResources);
 
@@ -162,8 +162,6 @@ public class AsciidoctorConventionPlugin implements Plugin<Project> {
 			sync.into(project.relativePath(destination));
 
 		});
-
-		return unzipResources;
 	}
 
 	@SuppressWarnings("unused")
