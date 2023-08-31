@@ -199,7 +199,7 @@ public abstract class ProcessExecutor {
 	}
 
 	protected static boolean isJvmOption(String option) {
-		return (StringUtils.hasText(option) && (option.startsWith("-D") || option.startsWith("-X")));
+		return StringUtils.hasText(option) && (option.startsWith("-D") || option.startsWith("-X"));
 	}
 
 	protected static boolean isValidArgument(String argument) {

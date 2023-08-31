@@ -687,7 +687,7 @@ public abstract class IntegrationTestsSupport {
 		boolean evaluate();
 	}
 
-	protected static abstract class AbstractApplicationEventPublisherCacheLifecycleListenerAdapter
+	protected abstract static class AbstractApplicationEventPublisherCacheLifecycleListenerAdapter
 			implements ApplicationEventPublisherAware, CacheLifecycleListener {
 
 		private ApplicationEventPublisher applicationEventPublisher;
