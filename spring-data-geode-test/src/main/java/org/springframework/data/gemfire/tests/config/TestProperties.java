@@ -159,7 +159,7 @@ public class TestProperties implements Iterable<String> {
 	 * @return the resolved property {@link String name}.
 	 */
 	protected @NonNull String toNonNullPropertyName(@Nullable String propertyName) {
-		return String.valueOf(propertyName);
+		return propertyName;
 	}
 
 	/**
