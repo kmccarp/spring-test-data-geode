@@ -74,9 +74,7 @@ public class CloseApplicationContextAfterTestClassTestExecutionListener extends 
 
 			String closeEnabledProperty = SpringProperties.getProperty(SPRING_TEST_CONTEXT_CLOSE_PROPERTY);
 
-			boolean resolvedCloseEnabled = Boolean.parseBoolean(closeEnabledProperty) || defaultCloseEnabled;
-
-			return resolvedCloseEnabled;
+			return Boolean.parseBoolean(closeEnabledProperty) || defaultCloseEnabled;
 		};
 	}
 
