@@ -147,8 +147,8 @@ public class GemFireMockObjectsConfiguration extends AbstractAnnotationConfigSup
 		};
 	}
 
-	@SuppressWarnings("rawtypes")
-	private static class CountMethodInterceptor implements MethodInterceptor {
+    @SuppressWarnings("rawtypes")
+    private static final class CountMethodInterceptor implements MethodInterceptor {
 
 		private static final String COUNT_METHOD_NAME = "count";
 

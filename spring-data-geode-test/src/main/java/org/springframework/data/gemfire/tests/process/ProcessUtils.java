@@ -190,7 +190,9 @@ public abstract class ProcessUtils {
 
 		Scanner in = new Scanner(System.in);
 
-		while (!TERM_TOKEN.equals(in.next()));
+        while (!TERM_TOKEN.equals(in.next())) {
+            continue;
+        }
 	}
 
 	protected static class DirectoryPidFileFilter extends PidFileFilter {
@@ -199,7 +201,7 @@ public abstract class ProcessUtils {
 
 		@Override
 		public boolean accept(File path) {
-			return (path != null && (path.isDirectory() || super.accept(path)));
+			return path != null && (path.isDirectory() || super.accept(path));
 		}
 	}
 
@@ -209,7 +211,7 @@ public abstract class ProcessUtils {
 
 		@Override
 		public boolean accept(File path) {
-			return (path != null && path.isFile() && path.getName().toLowerCase().endsWith(".pid"));
+			return path != null && path.isFile() && path.getName().toLowerCase().endsWith(".pid");
 		}
 	}
 }

@@ -64,7 +64,7 @@ public abstract class FileSystemUtils extends FileUtils {
 			}
 		}
 
-		return ((!exists(path) || path.delete()) && success);
+		return (!exists(path) || path.delete()) && success;
 	}
 
 	public static boolean exists(@Nullable File path) {
@@ -136,7 +136,7 @@ public abstract class FileSystemUtils extends FileUtils {
 		}
 	}
 
-	public static class CompositeFileFilter implements FileFilter {
+    public static final class CompositeFileFilter implements FileFilter {
 
 		private final FileFilter fileFilterOne;
 		private final FileFilter fileFilterTwo;
@@ -150,8 +150,8 @@ public abstract class FileSystemUtils extends FileUtils {
 		}
 
 		protected static FileFilter compose(FileFilter fileFilterOne, LogicalOperator operator, FileFilter fileFilterTwo) {
-			return (fileFilterOne == null ? fileFilterTwo : (fileFilterTwo == null ? fileFilterOne
-				: new CompositeFileFilter(fileFilterOne, operator, fileFilterTwo)));
+			return fileFilterOne == null ? fileFilterTwo : (fileFilterTwo == null ? fileFilterOne
+				: new CompositeFileFilter(fileFilterOne, operator, fileFilterTwo));
 		}
 
 		public static FileFilter and(FileFilter... fileFilters) {
@@ -187,9 +187,9 @@ public abstract class FileSystemUtils extends FileUtils {
 
 			switch (this.logicalOperator) {
 				case AND:
-					return (fileFilterOne.accept(pathname) && fileFilterTwo.accept(pathname));
+					return fileFilterOne.accept(pathname) && fileFilterTwo.accept(pathname);
 				case OR:
-					return (fileFilterOne.accept(pathname) || fileFilterTwo.accept(pathname));
+					return fileFilterOne.accept(pathname) || fileFilterTwo.accept(pathname);
 				default:
 					throw new UnsupportedOperationException(String.format(
 						"Logical operator [%s] is unsupported", this.logicalOperator));
