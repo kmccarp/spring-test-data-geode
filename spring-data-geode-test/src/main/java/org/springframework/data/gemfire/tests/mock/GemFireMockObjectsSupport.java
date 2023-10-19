@@ -364,8 +364,8 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 	static synchronized void destroyGemFireObjects() {
 
 		cachedGemFireObjects.stream()
-			.filter(gemfireObject -> gemfireObject instanceof DisposableBean)
-			.map(gemfireObject -> (DisposableBean) gemfireObject)
+			.filter(DisposableBean.class::isInstance)
+			.map(DisposableBean.class::cast)
 			.forEach(disposableBean -> {
 				ObjectUtils.doOperationSafely(() -> {
 					disposableBean.destroy();
@@ -1309,7 +1309,7 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 		ClientRegionFactory<K, V> mockClientRegionFactory =
 			mock(ClientRegionFactory.class, mockObjectIdentifier("MockClientRegionFactory"));
 
-		ExpirationAttributes DEFAULT_EXPIRATION_ATTRIBUTES =
+		ExpirationAttributes defaultExpirationAttributes =
 			new ExpirationAttributes(0, ExpirationAction.INVALIDATE);
 
 		Optional<RegionAttributes<K, V>> optionalRegionAttributes = Optional.ofNullable(regionAttributes);
@@ -1348,10 +1348,10 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 			.map(RegionAttributes::getDiskStoreName).orElse(null));
 
 		AtomicReference<ExpirationAttributes> entryIdleTimeout = new AtomicReference<>(optionalRegionAttributes
-			.map(RegionAttributes::getEntryIdleTimeout).orElse(DEFAULT_EXPIRATION_ATTRIBUTES));
+			.map(RegionAttributes::getEntryIdleTimeout).orElse(defaultExpirationAttributes));
 
 		AtomicReference<ExpirationAttributes> entryTimeToLive = new AtomicReference<>(optionalRegionAttributes
-			.map(RegionAttributes::getEntryTimeToLive).orElse(DEFAULT_EXPIRATION_ATTRIBUTES));
+			.map(RegionAttributes::getEntryTimeToLive).orElse(defaultExpirationAttributes));
 
 		AtomicReference<EvictionAttributes> evictionAttributes = new AtomicReference<>(optionalRegionAttributes
 			.map(RegionAttributes::getEvictionAttributes).orElseGet(EvictionAttributes::createLRUEntryAttributes));
@@ -1366,10 +1366,10 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 			.map(RegionAttributes::getPoolName).orElse(null));
 
 		AtomicReference<ExpirationAttributes> regionIdleTimeout = new AtomicReference<>(optionalRegionAttributes
-			.map(RegionAttributes::getRegionIdleTimeout).orElse(DEFAULT_EXPIRATION_ATTRIBUTES));
+			.map(RegionAttributes::getRegionIdleTimeout).orElse(defaultExpirationAttributes));
 
 		AtomicReference<ExpirationAttributes> regionTimeToLive = new AtomicReference<>(optionalRegionAttributes
-			.map(RegionAttributes::getRegionTimeToLive).orElse(DEFAULT_EXPIRATION_ATTRIBUTES));
+			.map(RegionAttributes::getRegionTimeToLive).orElse(defaultExpirationAttributes));
 
 		AtomicReference<Class<V>> valueConstraint = new AtomicReference<>(optionalRegionAttributes
 			.map(RegionAttributes::getValueConstraint).orElse(null));
@@ -1491,7 +1491,7 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 			new AtomicReference<>(SubscriptionEvictionPolicy.DEFAULT);
 
 		Function<String, SubscriptionEvictionPolicy> stringToSubscriptionEvictionPolicyConverter =
-			arg -> SubscriptionEvictionPolicy.valueOfIgnoreCase(String.valueOf(arg));
+			SubscriptionEvictionPolicy::valueOfIgnoreCase;
 
 		Function<SubscriptionEvictionPolicy, String> subscriptionEvictionPolicyToStringConverter =
 			arg -> Optional.ofNullable(arg).map(Object::toString).map(String::toLowerCase).orElse(null);
@@ -1726,9 +1726,7 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 
 				Random randomPort = new Random(System.currentTimeMillis());
 
-				int port = startPort.get() + randomPort.nextInt(endPort.get() - startPort.get());;
-
-				return port;
+				return startPort.get() + randomPort.nextInt(endPort.get() - startPort.get());
 			});
 
 			when(mockGatewayReceiver.getSocketBufferSize()).thenAnswer(newGetter(socketBufferSize));
@@ -2143,12 +2141,12 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 					int indexOfFromClause = queryString.indexOf(FROM_KEYWORD);
 					int indexOfWhereClause = queryString.indexOf(WHERE_KEYWORD);
 
-					queryString = (indexOfFromClause > -1
-						? queryString.substring(indexOfFromClause + FROM_KEYWORD.length()) : queryString);
+					queryString = indexOfFromClause > -1
+						? queryString.substring(indexOfFromClause + FROM_KEYWORD.length()) : queryString;
 
-					queryString = (indexOfWhereClause > 0 ? queryString.substring(0, indexOfWhereClause) : queryString);
+					queryString = indexOfWhereClause > 0 ? queryString.substring(0, indexOfWhereClause) : queryString;
 
-					queryString = (queryString.startsWith(Region.SEPARATOR) ? queryString.substring(1) : queryString);
+					queryString = queryString.startsWith(Region.SEPARATOR) ? queryString.substring(1) : queryString;
 
 					return invocation.getArgument(0).equals(queryString.trim());
 
@@ -2409,7 +2407,7 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 
 	private static String fromClauseToRegionPath(String fromClause) {
 
-		String regionName = String.valueOf(fromClause);
+		String regionName = fromClause;
 
 		int indexOfDot = regionName.indexOf(".");
 		int indexOfSpace = regionName.indexOf(" ");
@@ -3184,7 +3182,7 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 
 		Optional<RegionAttributes<K, V>> optionalRegionAttributes = Optional.ofNullable(regionAttributes);
 
-		ExpirationAttributes DEFAULT_EXPIRATION_ATTRIBUTES =
+		ExpirationAttributes defaultExpirationAttributes =
 			new ExpirationAttributes(0, ExpirationAction.INVALIDATE);
 
 		AtomicBoolean cloningEnabled = new AtomicBoolean(optionalRegionAttributes
@@ -3269,11 +3267,11 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 
 		AtomicReference<ExpirationAttributes> entryIdleTimeout = new AtomicReference<>(optionalRegionAttributes
 			.map(RegionAttributes::getEntryIdleTimeout)
-			.orElse(DEFAULT_EXPIRATION_ATTRIBUTES));
+			.orElse(defaultExpirationAttributes));
 
 		AtomicReference<ExpirationAttributes> entryTimeToLive = new AtomicReference<>(optionalRegionAttributes
 			.map(RegionAttributes::getEntryTimeToLive)
-			.orElse(DEFAULT_EXPIRATION_ATTRIBUTES));
+			.orElse(defaultExpirationAttributes));
 
 		AtomicReference<EvictionAttributes> evictionAttributes = new AtomicReference<>(optionalRegionAttributes
 			.map(RegionAttributes::getEvictionAttributes)
@@ -3301,11 +3299,11 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 
 		AtomicReference<ExpirationAttributes> regionIdleTimeout = new AtomicReference<>(optionalRegionAttributes
 			.map(RegionAttributes::getRegionIdleTimeout)
-			.orElse(DEFAULT_EXPIRATION_ATTRIBUTES));
+			.orElse(defaultExpirationAttributes));
 
 		AtomicReference<ExpirationAttributes> regionTimeToLive = new AtomicReference<>(optionalRegionAttributes
 			.map(RegionAttributes::getRegionTimeToLive)
-			.orElse(DEFAULT_EXPIRATION_ATTRIBUTES));
+			.orElse(defaultExpirationAttributes));
 
 		AtomicReference<Scope> scope = new AtomicReference<>(optionalRegionAttributes
 			.map(RegionAttributes::getScope)
@@ -3789,9 +3787,7 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 
 			dsPropsField.setAccessible(true);
 
-			Properties gemfireApiProperties = (Properties) dsPropsField.get(cacheFactory);
-
-			return gemfireApiProperties;
+			return (Properties) dsPropsField.get(cacheFactory);
 		}
 		catch (Throwable cause) {
 
@@ -3839,7 +3835,7 @@ public abstract class GemFireMockObjectsSupport extends MockObjectsSupport {
 		return gemfireSystemProperties;
 	}
 
-	public static class LuceneIndexKey {
+	public static final class LuceneIndexKey {
 
 		private final String indexName;
 		private final String regionPath;
